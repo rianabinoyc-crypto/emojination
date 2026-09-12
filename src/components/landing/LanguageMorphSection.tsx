@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   EmojiTranslateIcon,
   EmojiTextToEmojiIcon,
@@ -8,7 +8,9 @@ import {
   EmojiSparkleIcon,
   EmojiArrowIcon,
 } from './CustomIcons';
+import { X, Sparkles, Check } from 'lucide-react';
 import { soundService } from '../../services/soundService';
+import { morphTextWithIntensity } from '../../services/translationEngine';
 
 interface PresetPhrase {
   id: string;
@@ -81,6 +83,17 @@ const PRESET_PHRASES: PresetPhrase[] = [
   },
 ];
 
+const SUGGESTED_THOUGHTS = [
+  'I need pizza and coffee right now',
+  'Coding all night with music on my laptop',
+  'My dog is sleeping happily on the couch',
+  'Why did the production server crash again?',
+  'Going to the beach for vacation with friends',
+  'Can you please call me when you wake up?'
+];
+
+const INTENSITY_NAMES = ['Mild / Reserved', 'Articulated', 'Dramatic', 'Unhinged / Cosmic'];
+
 export const LanguageMorphSection: React.FC = () => {
   const [selectedPresetId, setSelectedPresetId] = useState<string>('p1');
   const [customInput, setCustomInput] = useState<string>('');
@@ -91,37 +104,20 @@ export const LanguageMorphSection: React.FC = () => {
     return PRESET_PHRASES.find(p => p.id === selectedPresetId) || PRESET_PHRASES[0];
   }, [selectedPresetId]);
 
-  // Current translated output based on preset or custom typing
-  const currentOutput = useMemo(() => {
-    if (customInput.trim()) {
-      // Basic dynamic translator mapping for custom input
-      const text = customInput.toLowerCase();
-      const tokens: string[] = [];
-      if (text.includes('love') || text.includes('heart')) tokens.push('❤️', '🥰');
-      if (text.includes('happy') || text.includes('good') || text.includes('great')) tokens.push('✨', '😄');
-      if (text.includes('tired') || text.includes('sleep') || text.includes('bed')) tokens.push('😴', '🛌', '☕');
-      if (text.includes('fire') || text.includes('hot') || text.includes('lit')) tokens.push('🔥', '⚡');
-      if (text.includes('dead') || text.includes('lol') || text.includes('haha')) tokens.push('💀', '🤣');
-      if (text.includes('think') || text.includes('wonder')) tokens.push('🤔', '💭');
-      if (text.includes('work') || text.includes('code') || text.includes('meeting')) tokens.push('💻', '📧', '☕');
-      if (tokens.length === 0) tokens.push('💭', '✨', '💬');
-
-      // Intensity amplifier
-      if (intensityLevel > 0) {
-        tokens.push('🫠');
-      }
-      if (intensityLevel > 1) {
-        tokens.push('💀', '💥');
-      }
-      if (intensityLevel > 2) {
-        tokens.push('🪦', '🛸', '🌌');
-      }
-      return tokens.join(' ');
+  // Dynamic real-time morphing pipeline for ANY text
+  const morphResult = useMemo(() => {
+    const rawInput = customInput.trim();
+    if (rawInput) {
+      return morphTextWithIntensity(rawInput, intensityLevel);
     }
 
     const levels = activePreset.levels;
     const idx = Math.min(intensityLevel, levels.length - 1);
-    return levels[idx];
+    return {
+      translated: levels[idx],
+      sentiment: activePreset.sentiment,
+      dopamine: activePreset.dopamine,
+    };
   }, [customInput, activePreset, intensityLevel]);
 
   const handleMakeItWorse = () => {
@@ -131,7 +127,7 @@ export const LanguageMorphSection: React.FC = () => {
 
   const handleCopy = () => {
     soundService.playAccept();
-    navigator.clipboard.writeText(currentOutput);
+    navigator.clipboard.writeText(morphResult.translated);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -145,7 +141,10 @@ export const LanguageMorphSection: React.FC = () => {
     setIntensityLevel(Math.floor(Math.random() * 3));
   };
 
-  const INTENSITY_NAMES = ['Mild / Reserved', 'Articulated', 'Dramatic', 'Unhinged / Cosmic'];
+  const handlePickSuggestion = (prompt: string) => {
+    soundService.playReaction();
+    setCustomInput(prompt);
+  };
 
   return (
     <section className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 select-none">
@@ -154,7 +153,7 @@ export const LanguageMorphSection: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 border-b border-stone-200/80 pb-6 gap-4">
         <div>
           <div className="flex items-center space-x-2 text-stone-400 text-xs font-mono tracking-wider uppercase mb-2">
-            <span>[SECTION 02]</span>
+            <span>[SECTION 01]</span>
             <span>•</span>
             <span>TRANSLATION DYNAMICS</span>
           </div>
@@ -163,13 +162,13 @@ export const LanguageMorphSection: React.FC = () => {
           </h2>
         </div>
         <p className="text-stone-500 font-serif italic text-sm sm:text-base max-w-md">
-          Ordinary alphabets dilute human intent. Watch rigid lexical structures dissolve into pure expressive semiotics.
+          Type any human thought, sentence, or idiom. Watch words dissolve in real-time into rich expressive semiotics.
         </p>
       </div>
 
       {/* Preset Phrase Picker Capsules */}
       <div className="mb-6 flex flex-wrap items-center gap-2 sm:gap-3">
-        <span className="text-xs font-mono text-stone-400 uppercase mr-1">Select phrase:</span>
+        <span className="text-xs font-mono text-stone-400 uppercase mr-1">Presets:</span>
         {PRESET_PHRASES.map((preset) => {
           const isSelected = selectedPresetId === preset.id && !customInput;
           return (
@@ -207,17 +206,46 @@ export const LanguageMorphSection: React.FC = () => {
               <EmojiTextToEmojiIcon className="w-4 h-4 text-amber-500" />
             </div>
             
-            <input
-              type="text"
-              value={customInput || activePreset.human}
-              onChange={(e) => setCustomInput(e.target.value)}
-              placeholder="Type any sentence or thought..."
-              className="w-full text-xl sm:text-2xl font-serif text-stone-900 bg-transparent border-b-2 border-dashed border-stone-300 focus:border-stone-800 focus:outline-none py-2 transition-colors"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={customInput !== '' ? customInput : activePreset.human}
+                onChange={(e) => setCustomInput(e.target.value)}
+                placeholder="Type ANY sentence, thought, or feeling..."
+                className="w-full text-xl sm:text-2xl font-serif text-stone-900 bg-transparent border-b-2 border-dashed border-stone-300 focus:border-stone-800 focus:outline-none py-2 pr-8 transition-colors"
+              />
+              {customInput && (
+                <button
+                  onClick={() => setCustomInput('')}
+                  className="absolute right-1 top-1/2 -translate-y-1/2 p-1 text-stone-400 hover:text-stone-700"
+                  title="Clear input"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
             
             <p className="text-[11px] text-stone-400 font-mono">
-              Click to edit or type your own real-time thought above
+              Live instant conversion: types into full emoji sequence as you write
             </p>
+
+            {/* Quick Inspiration Prompts */}
+            <div className="pt-2 space-y-1.5">
+              <span className="text-[10px] font-mono text-stone-400 uppercase tracking-wider block">
+                Try typing:
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {SUGGESTED_THOUGHTS.map((prompt) => (
+                  <button
+                    key={prompt}
+                    onClick={() => handlePickSuggestion(prompt)}
+                    className="text-[11px] px-2.5 py-1 rounded-lg bg-[#faf7f2] hover:bg-stone-100 text-stone-600 hover:text-stone-900 border border-stone-200/70 transition-colors text-left truncate max-w-full"
+                  >
+                    &ldquo;{prompt}&rdquo;
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Center Connector: Arrow Transition */}
@@ -236,32 +264,32 @@ export const LanguageMorphSection: React.FC = () => {
               <span className="text-[11px] font-mono tracking-wider uppercase text-amber-700 font-semibold">
                 EMOJI TRANSLATION [TRANSCENDENT]
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100/70 text-amber-800 font-mono">
-                {activePreset.sentiment}
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-100/70 text-amber-900 font-mono font-medium">
+                {morphResult.sentiment}
               </span>
             </div>
 
             {/* Rendered Emoji Sequence */}
-            <div className="min-h-[64px] flex items-center p-3 rounded-2xl bg-[#faf8f5] border border-stone-200/60 shadow-inner">
+            <div className="min-h-[80px] flex items-center p-4 rounded-2xl bg-[#faf8f5] border border-stone-200/60 shadow-inner overflow-x-auto">
               <span
-                key={currentOutput}
-                className="text-3xl sm:text-4xl lg:text-5xl filter drop-shadow-sm tracking-widest animate-emoji-pop select-all"
+                key={morphResult.translated}
+                className="text-3xl sm:text-4xl lg:text-5xl filter drop-shadow-sm tracking-widest animate-emoji-pop select-all whitespace-normal"
               >
-                {currentOutput}
+                {morphResult.translated}
               </span>
             </div>
 
             <div className="flex items-center justify-between text-[11px] font-mono text-stone-400 pt-1">
-              <span>Dopamine Saturation: {activePreset.dopamine}%</span>
+              <span>Dopamine Saturation: {morphResult.dopamine}%</span>
               <span>Level: {INTENSITY_NAMES[intensityLevel]}</span>
             </div>
           </div>
         </div>
 
-        {/* Action Controls Toolbar With Custom Icon Language */}
+        {/* Action Controls Toolbar */}
         <div className="pt-6 flex flex-wrap items-center justify-between gap-4">
           
-          {/* Left Actions: "Make it worse" / Intensify button */}
+          {/* Left Actions: Intensify / Make it worse */}
           <div className="flex items-center space-x-3">
             <button
               onClick={handleMakeItWorse}
@@ -269,7 +297,7 @@ export const LanguageMorphSection: React.FC = () => {
             >
               <EmojiGenerateIcon className="w-4 h-4 text-amber-600" />
               <span>Make it worse (Intensify)</span>
-              <span className="px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 text-[10px] font-mono">
+              <span className="px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 text-[10px] font-mono font-bold">
                 lvl {intensityLevel + 1}
               </span>
             </button>
@@ -283,17 +311,27 @@ export const LanguageMorphSection: React.FC = () => {
             </button>
           </div>
 
-          {/* Right Actions: Copy with custom double-speech-bubble icon */}
+          {/* Right Actions: Copy Glyphs */}
           <div className="flex items-center space-x-3">
             <button
               onClick={handleCopy}
               className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-50 text-xs sm:text-sm font-medium shadow-sm active:scale-95 transition-all"
             >
-              <EmojiCopyIcon className="w-4 h-4 text-amber-300" />
-              <span>{copied ? 'Copied to clipboard!' : 'Copy Glyphs'}</span>
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-300" />
+                  <span>Copied to clipboard!</span>
+                </>
+              ) : (
+                <>
+                  <EmojiCopyIcon className="w-4 h-4 text-amber-300" />
+                  <span>Copy Glyphs</span>
+                </>
+              )}
             </button>
           </div>
         </div>
+
       </div>
     </section>
   );

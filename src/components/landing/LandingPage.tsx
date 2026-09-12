@@ -97,7 +97,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         {/* Asymmetric Living Hero Section */}
         <HeroLivingEmoji
           onTranslateClick={() => scrollToSection(languageSectionRef)}
-          onExploreClick={() => scrollToSection(languageSectionRef)}
+          onExploreClick={() => scrollToSection(dictionarySectionRef)}
         />
 
         {/* Section Divider Line with Annotation */}
@@ -119,9 +119,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           <span>✦ 02</span>
         </div>
 
-        {/* Experimental Visual Dictionary Section */}
+        {/* The Living Dictionary (Icon with Tagline) */}
         <div ref={dictionarySectionRef}>
-          <VisualDictionarySection />
+          <VisualDictionarySection onNavigate={onNavigate} />
         </div>
 
         {/* Section Divider Line with Annotation */}
