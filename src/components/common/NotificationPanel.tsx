@@ -67,7 +67,7 @@ export const NotificationPanel: React.FC<NotificationPanelProps> = ({
             <span className="text-3xl block mb-2">📜</span>
             <p className="text-xs font-medium">No pending dispatches.</p>
             <p className="text-[11px] text-stone-400 mt-1 font-serif italic">
-              Your emoji relational universe is currently in thermodynamic equilibrium.
+              All quiet on the notification wire.
             </p>
           </div>
         ) : (

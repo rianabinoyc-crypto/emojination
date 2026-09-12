@@ -42,7 +42,7 @@ export function getTodayDateString(): string {
 export const DEFAULT_USER_PROFILE: UserProfile = {
   id: 'user_main',
   username: 'EmojiConnoisseur',
-  tagline: 'Citizen of the Emoji Universe',
+  tagline: 'Emoji Enthusiast',
   favoriteEmoji: '😎',
   archetype: 'Chaotic Optimist',
   bio: 'Software artisan, hydration advocate, caffeine enthusiast, and full-time overthinker. Exploring the infinite possibilities of the emoji ecosystem.',
@@ -216,8 +216,8 @@ class StorageService {
         {
           id: 'notif-welcome',
           type: 'system',
-          title: 'Welcome to EMOJINATION™ Universe',
-          message: 'Everything Emoji. One Place. Your all-in-one destination is ready.',
+          title: 'Welcome to Emoji-Nation',
+          message: 'Your interactive emoji platform is ready.',
           timestamp: 'Just now',
           read: false,
           avatarEmoji: '✨'

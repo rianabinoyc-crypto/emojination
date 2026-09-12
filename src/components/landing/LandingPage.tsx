@@ -126,12 +126,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
         {/* Section Divider Line with Annotation */}
         <div className="max-w-6xl mx-auto px-4 sm:px-8 my-4 flex items-center justify-between text-stone-300 text-[10px] font-mono">
-          <span>// UNIVERSAL ECOSYSTEM ATLAS</span>
+          <span>// APPLICATION DIRECTORY</span>
           <div className="flex-1 mx-4 border-b border-stone-200/70" />
           <span>✦ 03</span>
         </div>
 
-        {/* Departments of Expression (Ecosystem Atlas) */}
+        {/* Application Directory */}
         <div ref={ecosystemSectionRef}>
           <EcosystemAtlasSection onNavigate={onNavigate} />
         </div>

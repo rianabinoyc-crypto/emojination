@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import {
   EmojiTranslateIcon,
   EmojiEmotionIcon,
@@ -113,16 +113,16 @@ export const EcosystemAtlasSection: React.FC<EcosystemAtlasSectionProps> = ({ on
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 border-b border-stone-200/80 pb-6 gap-4">
         <div>
           <div className="flex items-center space-x-2 text-stone-400 text-xs font-mono tracking-wider uppercase mb-2">
-            <span>[SECTION 04]</span>
+            <span>[SECTION 03]</span>
             <span>•</span>
-            <span>THE ECOSYSTEM ATLAS</span>
+            <span>APPLICATION DIRECTORY</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-serif tracking-tight text-stone-900">
-            Departments of <span className="italic font-normal text-stone-600">Expression</span>
+            Explore the <span className="italic font-normal text-stone-600">Applications</span>
           </h2>
         </div>
         <p className="text-stone-500 font-serif italic text-sm sm:text-base max-w-md">
-          Not isolated features, but interconnected rooms of a living visual ecosystem. Click to enter any domain.
+          Everything you need to interact, communicate, analyze, and play with emojis. Select any app to begin.
         </p>
       </div>
 

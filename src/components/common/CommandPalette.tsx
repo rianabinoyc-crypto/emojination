@@ -5,7 +5,30 @@ import {
   Command,
   ArrowRight,
   Sparkles,
+} from 'lucide-react';
 import { soundService } from '../../services/soundService';
+
+interface PaletteApp {
+  id: string;
+  route: string;
+  emoji: string;
+  title: string;
+  tagline: string;
+}
+
+const PALETTE_APPS: PaletteApp[] = [
+  { id: 'dating', route: 'dating', emoji: '💘', title: 'Emoji Dating', tagline: 'Soulmate matching and reciprocal chemistry' },
+  { id: 'matches', route: 'matches', emoji: '💕', title: 'Your Matches', tagline: 'Review mutual matches and active connections' },
+  { id: 'chat', route: 'chat', emoji: '💬', title: 'Emoji Chat', tagline: 'Simulated real-time chat with 20+ moods' },
+  { id: 'health', route: 'health', emoji: '❤️', title: 'Emoji Health & Fitness', tagline: 'Hydration, step counter, sleep tracker' },
+  { id: 'personalities', route: 'personalities', emoji: '🧠', title: 'Emoji Personalities', tagline: '50+ archetypes and custom persona builder' },
+  { id: 'tools', route: 'tools', emoji: '🎨', title: 'Emoji Tools', tagline: 'Emoji kitchen mixer, cipher translator, horoscopes' },
+  { id: 'encyclopedia', route: 'encyclopedia', emoji: '📖', title: 'Emoji Encyclopedia', tagline: 'Unicode history, meanings, and trivia' },
+  { id: 'analytics', route: 'analytics', emoji: '📊', title: 'Emoji Analytics', tagline: 'Empirical data streams, charts, and metrics' },
+  { id: 'achievements', route: 'achievements', emoji: '🏆', title: 'Emoji Achievements', tagline: 'Quests, levels, and badges' },
+  { id: 'profile', route: 'profile', emoji: '👤', title: 'User Profile', tagline: 'Identity, bio, interests, and emotional radar' },
+  { id: 'settings', route: 'settings', emoji: '⚙️', title: 'Settings', tagline: 'Audio, notifications, and data management' },
+];
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -42,16 +65,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   if (!isOpen) return null;
 
-  const filteredApps = ALL_ECOSYSTEM_APPS.filter(app => {
+  const filteredApps = PALETTE_APPS.filter(app => {
     const q = query.toLowerCase().trim();
     if (!q) return true;
     return (
       app.title.toLowerCase().includes(q) ||
-      app.shortTitle.toLowerCase().includes(q) ||
-      app.brandName.toLowerCase().includes(q) ||
-      app.tagline.toLowerCase().includes(q) ||
-      app.technicalSubtext.toLowerCase().includes(q) ||
-      app.pillarId.toLowerCase().includes(q)
+      app.tagline.toLowerCase().includes(q)
     );
   });
 
