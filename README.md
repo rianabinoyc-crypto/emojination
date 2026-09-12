@@ -7,8 +7,8 @@
 ## Basic Details
 ### Team Name: Pulchaadi
 ### Team members
-member1:Delna Saji
-member 2:Riana Binoy
+**member1:Delna Saji**
+**member 2:Riana Binoy**
 
 
 ### Project Description
