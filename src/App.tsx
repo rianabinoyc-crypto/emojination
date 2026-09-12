@@ -43,6 +43,8 @@ import { AnalyticsDashboard } from './components/analytics/AnalyticsDashboard';
 import { EncyclopediaView } from './components/encyclopedia/EncyclopediaView';
 import { UserProfileView } from './components/profile/UserProfileView';
 import { SettingsView } from './components/settings/SettingsView';
+import { EcosystemPillarBar } from './components/common/EcosystemPillarBar';
+import { CommandPalette } from './components/common/CommandPalette';
 
 export function App() {
   // Navigation Route State
@@ -82,6 +84,20 @@ export function App() {
   const [modalCompatibility, setModalCompatibility] = useState<number>(95);
   const [activeChatEmojiId, setActiveChatEmojiId] = useState<string | null>(null);
   const [typingEmojiId, setTypingEmojiId] = useState<string | null>(null);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+
+  // Global Command Palette Shortcut: Cmd+K / Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        soundService.playReaction();
+        setIsCommandPaletteOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Sync sound settings with sound service on load
   useEffect(() => {
@@ -617,6 +633,14 @@ export function App() {
               storageService.saveSettings(updated);
             }}
             onGoHome={() => navigateTo('landing')}
+            onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+          />
+
+          {/* Overengineered Ecosystem Pillar Breadcrumbs & Telemetry HUD */}
+          <EcosystemPillarBar
+            currentRoute={currentRoute}
+            onNavigate={navigateTo}
+            onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
           />
 
           <div className="flex-1 pb-20 lg:pb-6">
@@ -769,6 +793,18 @@ export function App() {
           )}
         </>
       )}
+
+      {/* Global Quantum Spotlight Command Palette (Cmd+K) */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onNavigate={(route) => {
+          if (route === 'chat' && matches.length > 0) {
+            setActiveChatEmojiId(matches[0].emojiId);
+          }
+          navigateTo(route);
+        }}
+      />
 
     </div>
   );

@@ -1,6 +1,7 @@
 ﻿import React, { useRef } from 'react';
 import { SoftAtmosphere } from './SoftAtmosphere';
 import { HeroLivingEmoji } from './HeroLivingEmoji';
+import { TripartiteEcosystemSection } from './TripartiteEcosystemSection';
 import { LanguageMorphSection } from './LanguageMorphSection';
 import { VisualDictionarySection } from './VisualDictionarySection';
 import { EcosystemAtlasSection } from './EcosystemAtlasSection';
@@ -17,6 +18,7 @@ interface LandingPageProps {
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
+  const pillarsSectionRef = useRef<HTMLDivElement>(null);
   const languageSectionRef = useRef<HTMLDivElement>(null);
   const dictionarySectionRef = useRef<HTMLDivElement>(null);
   const ecosystemSectionRef = useRef<HTMLDivElement>(null);
@@ -59,6 +61,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           {/* Minimal Links */}
           <nav className="hidden md:flex items-center space-x-6 text-xs font-mono uppercase tracking-wider text-stone-500">
             <button
+              onClick={() => scrollToSection(pillarsSectionRef)}
+              className="hover:text-stone-900 transition-colors"
+            >
+              Pillars
+            </button>
+            <button
               onClick={() => scrollToSection(languageSectionRef)}
               className="hover:text-stone-900 transition-colors"
             >
@@ -74,7 +82,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               onClick={() => scrollToSection(ecosystemSectionRef)}
               className="hover:text-stone-900 transition-colors"
             >
-              Ecosystem
+              Atlas
             </button>
           </nav>
 
@@ -84,7 +92,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               onClick={handleLaunchApp}
               className="inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full bg-stone-900 text-stone-50 text-xs font-medium hover:bg-stone-800 shadow-sm active:scale-95 transition-all"
             >
-              <span>Try it</span>
+              <span>Launch App</span>
               <EmojiArrowIcon className="w-3.5 h-3.5 text-stone-400" />
             </button>
           </div>
@@ -97,12 +105,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         {/* Asymmetric Living Hero Section */}
         <HeroLivingEmoji
           onTranslateClick={() => scrollToSection(languageSectionRef)}
-          onExploreClick={() => scrollToSection(ecosystemSectionRef)}
+          onExploreClick={() => scrollToSection(pillarsSectionRef)}
         />
 
         {/* Section Divider Line with Annotation */}
         <div className="max-w-6xl mx-auto px-4 sm:px-8 my-4 flex items-center justify-between text-stone-300 text-[10px] font-mono">
-          <span>// TRANSLATION PROTOCOL</span>
+          <span>// ECOSYSTEM ARCHITECTURE & PILLAR SCHEMATIC</span>
+          <div className="flex-1 mx-4 border-b border-stone-200/70" />
+          <span>✦ 01</span>
+        </div>
+
+        {/* 3-Pillar Tripartite Architecture Section (CONNECT / EXPRESS / TRACK) */}
+        <div ref={pillarsSectionRef}>
+          <TripartiteEcosystemSection onNavigate={onNavigate} />
+        </div>
+
+        {/* Section Divider Line with Annotation */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 my-4 flex items-center justify-between text-stone-300 text-[10px] font-mono">
+          <span>// TRANSLATION PROTOCOL & MORPH ENGINE</span>
           <div className="flex-1 mx-4 border-b border-stone-200/70" />
           <span>✦ 02</span>
         </div>
@@ -114,7 +134,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
         {/* Section Divider Line with Annotation */}
         <div className="max-w-6xl mx-auto px-4 sm:px-8 my-4 flex items-center justify-between text-stone-300 text-[10px] font-mono">
-          <span>// PHONETIC LEXICON</span>
+          <span>// PHONETIC LEXICON & EXPERIMENTAL DICTIONARY</span>
           <div className="flex-1 mx-4 border-b border-stone-200/70" />
           <span>✦ 03</span>
         </div>

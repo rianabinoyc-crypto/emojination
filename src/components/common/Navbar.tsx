@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { 
   Heart, 
   MessageSquare, 
@@ -15,10 +15,12 @@ import {
   Wrench,
   Trophy,
   Home,
-  ChevronDown
+  ChevronDown,
+  Command,
 } from 'lucide-react';
 import { UserProfile, NotificationItem } from '../../types';
 import { NotificationPanel } from './NotificationPanel';
+import { soundService } from '../../services/soundService';
 
 interface NavbarProps {
   activeTab: string;
@@ -32,6 +34,7 @@ interface NavbarProps {
   soundEnabled: boolean;
   onToggleSound: () => void;
   onGoHome: () => void;
+  onOpenCommandPalette?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -45,35 +48,49 @@ export const Navbar: React.FC<NavbarProps> = ({
   onClearNotifications,
   soundEnabled,
   onToggleSound,
-  onGoHome
+  onGoHome,
+  onOpenCommandPalette,
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMoreMenu, setShowMoreMenu] = useState(false);
   const unreadNotifsCount = notifications.filter(n => !n.read).length;
 
-  // Primary prominent nav tabs
-  const primaryNavItems = [
-    { id: 'landing', label: 'Home', icon: Home, badge: null },
-    { id: 'dating', label: 'Dating', icon: Flame, badge: null },
-    { id: 'matches', label: 'Matches', icon: Heart, badge: matchesCount > 0 ? matchesCount : null },
-    { id: 'chat', label: 'Chat', icon: MessageSquare, badge: unreadMessagesCount > 0 ? unreadMessagesCount : null },
-    { id: 'health', label: 'Health', icon: Activity, badge: null },
-    { id: 'personalities', label: 'Personalities', icon: Brain, badge: null },
-    { id: 'tools', label: 'Tools', icon: Wrench, badge: null },
-    { id: 'achievements', label: 'Achievements', icon: Trophy, badge: null },
+  // 3 Primary Ecosystem Pillars Navigation
+  const pillarGroups = [
+    {
+      pillar: 'CONNECT',
+      badge: '💘',
+      color: 'hover:text-pink-300',
+      items: [
+        { id: 'dating', label: 'Dating', icon: Flame, badge: null },
+        { id: 'matches', label: 'Matches', icon: Heart, badge: matchesCount > 0 ? matchesCount : null },
+        { id: 'personalities', label: 'Personas', icon: Brain, badge: null },
+      ]
+    },
+    {
+      pillar: 'EXPRESS',
+      badge: '💬',
+      color: 'hover:text-cyan-300',
+      items: [
+        { id: 'chat', label: 'Chat', icon: MessageSquare, badge: unreadMessagesCount > 0 ? unreadMessagesCount : null },
+        { id: 'tools', label: 'Tools', icon: Wrench, badge: null },
+        { id: 'encyclopedia', label: 'Codex', icon: BookOpen, badge: null },
+      ]
+    },
+    {
+      pillar: 'TRACK',
+      badge: '❤️',
+      color: 'hover:text-emerald-300',
+      items: [
+        { id: 'health', label: 'Health', icon: Activity, badge: null },
+        { id: 'analytics', label: 'Analytics', icon: BarChart3, badge: null },
+        { id: 'achievements', label: 'Quests', icon: Trophy, badge: null },
+      ]
+    }
   ];
-
-  // Secondary overflow tabs
-  const secondaryNavItems = [
-    { id: 'encyclopedia', label: 'Encyclopedia', icon: BookOpen },
-    { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-    { id: 'settings', label: 'Settings', icon: Settings },
-  ];
-
-  const isSecondaryActive = secondaryNavItems.some(item => item.id === activeTab);
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-xl select-none">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between">
         
         {/* Brand Logo & Home Trigger */}
@@ -98,79 +115,81 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-1 xl:space-x-1.5">
-          {primaryNavItems.map(item => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => {
-                  if (item.id === 'landing') onGoHome();
-                  else setActiveTab(item.id);
-                }}
-                className={`relative flex items-center space-x-1.5 px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 ${
-                  isActive 
-                    ? 'bg-gradient-to-r from-pink-500/20 to-purple-500/20 text-pink-300 border border-pink-500/30 shadow-sm shadow-pink-500/10' 
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
-                }`}
-              >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-pink-400' : 'text-slate-400'}`} />
-                <span>{item.label}</span>
-                {item.badge !== null && (
-                  <span className="ml-0.5 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-pink-500 text-white animate-pulse">
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            );
-          })}
+        {/* Desktop Navigation Links Grouped by Pillars */}
+        <nav className="hidden lg:flex items-center space-x-2 xl:space-x-3">
+          
+          {/* Home Link */}
+          <button
+            onClick={onGoHome}
+            className={`flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              activeTab === 'landing'
+                ? 'bg-slate-800 text-white'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <Home className="w-3.5 h-3.5" />
+            <span>Universe</span>
+          </button>
 
-          {/* More Dropdown for Secondary Tabs */}
-          <div className="relative">
-            <button
-              onClick={() => setShowMoreMenu(!showMoreMenu)}
-              className={`flex items-center space-x-1 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all border ${
-                isSecondaryActive
-                  ? 'bg-purple-950/40 border-purple-500/40 text-purple-200'
-                  : 'text-slate-400 hover:text-white border-transparent hover:bg-slate-800/60'
-              }`}
+          <span className="text-slate-800 font-mono">|</span>
+
+          {/* 3 Pillar Groups */}
+          {pillarGroups.map((group) => (
+            <div
+              key={group.pillar}
+              className="flex items-center space-x-0.5 bg-slate-900/70 p-0.5 rounded-xl border border-slate-800/80"
             >
-              <span>More</span>
-              <ChevronDown className="w-3 h-3" />
-            </button>
+              <span className="px-1.5 py-0.5 text-[9px] font-mono font-bold text-slate-500">
+                {group.pillar}
+              </span>
+              {group.items.map(item => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      soundService.playAccept();
+                      setActiveTab(item.id);
+                    }}
+                    className={`relative flex items-center space-x-1 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+                      isActive
+                        ? 'bg-slate-800 text-pink-300 border border-pink-500/30 shadow-sm'
+                        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-850'
+                    }`}
+                  >
+                    <Icon className={`w-3 h-3 ${isActive ? 'text-pink-400' : 'text-slate-400'}`} />
+                    <span>{item.label}</span>
+                    {item.badge !== null && (
+                      <span className="ml-0.5 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-pink-500 text-white animate-pulse">
+                        {item.badge}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          ))}
 
-            {showMoreMenu && (
-              <div className="absolute right-0 mt-2 w-44 rounded-2xl glass-panel-glow bg-slate-900 border border-slate-700/80 shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
-                {secondaryNavItems.map(item => {
-                  const Icon = item.icon;
-                  const isActive = activeTab === item.id;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        setActiveTab(item.id);
-                        setShowMoreMenu(false);
-                      }}
-                      className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-colors ${
-                        isActive
-                          ? 'bg-purple-600/30 text-purple-300'
-                          : 'text-slate-300 hover:bg-slate-800 hover:text-white'
-                      }`}
-                    >
-                      <Icon className="w-3.5 h-3.5 text-purple-400" />
-                      <span>{item.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
         </nav>
 
-        {/* Right Utility Buttons */}
+        {/* Right Utility Buttons & Spotlight Command Palette */}
         <div className="flex items-center space-x-1.5 sm:space-x-2">
+          
+          {/* Spotlight Command Palette Trigger */}
+          <button
+            onClick={onOpenCommandPalette}
+            aria-label="Open Command Hub"
+            title="Command Palette (Cmd+K)"
+            className="hidden sm:flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-slate-700 text-xs font-medium transition-all"
+          >
+            <Command className="w-3.5 h-3.5 text-pink-400" />
+            <span className="hidden xl:inline">Hub</span>
+            <kbd className="px-1 py-0.2 bg-slate-950 rounded text-[9px] font-mono text-slate-400 border border-slate-800">
+              ⌘K
+            </kbd>
+          </button>
+
           {/* Sound Toggle */}
           <button
             onClick={onToggleSound}
