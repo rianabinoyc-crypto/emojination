@@ -1,4 +1,4 @@
-﻿import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { soundService } from '../../services/soundService';
 
 export interface EmojiMood {
@@ -120,7 +120,8 @@ export const EmojiMascot = forwardRef<HTMLDivElement, EmojiMascotProps>(({
 
         {/* Floating Living Mascot Character */}
         <div
-          className={`relative text-6xl sm:text-7xl md:text-8xl filter drop-shadow-[0_14px_24px_rgba(0,0,0,0.45)] transition-transform duration-300 ${
+          key={mood.emoji}
+          className={`relative text-6xl sm:text-7xl md:text-8xl filter drop-shadow-[0_14px_24px_rgba(0,0,0,0.45)] transition-transform duration-300 animate-emoji-pop ${
             clicked ? 'scale-125 rotate-12' : ''
           }`}
           style={{
