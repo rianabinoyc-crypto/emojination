@@ -35,8 +35,8 @@ export const EmojiCard: React.FC<EmojiCardProps> = ({
         userSelect: 'none'
       }
     : {
-        transform: 'scale(0.95) translateY(16px)',
-        opacity: 0.6,
+        transform: 'scale(0.96) translateY(14px)',
+        opacity: 0.7,
         pointerEvents: 'none'
       };
 
@@ -44,134 +44,116 @@ export const EmojiCard: React.FC<EmojiCardProps> = ({
     <div
       {...(isTopCard ? dragProps : {})}
       style={style}
-      className={`relative w-full max-w-sm sm:max-w-md h-[580px] sm:h-[620px] rounded-3xl p-6 flex flex-col justify-between overflow-hidden shadow-2xl glass-panel border border-slate-700/80 bg-slate-900/90 select-none ${
-        isTopCard ? 'z-20 active:cursor-grabbing hover:border-slate-600' : 'z-10'
+      className={`relative w-full max-w-sm sm:max-w-md h-[590px] sm:h-[630px] rounded-3xl p-6 sm:p-7 flex flex-col justify-between overflow-hidden shadow-[0_20px_45px_-12px_rgba(20,61,43,0.12)] border-2 border-stone-200/90 bg-white select-none ${
+        isTopCard ? 'z-20 active:cursor-grabbing hover:border-stone-400' : 'z-10'
       }`}
     >
-      {/* Background ambient gradient based on emoji traits */}
+      {/* Background delicate paper pastel glow based on emoji traits */}
       <div 
-        className="absolute -top-20 -right-20 w-60 h-60 rounded-full blur-[90px] pointer-events-none opacity-40"
+        className="absolute -top-16 -right-16 w-60 h-60 rounded-full blur-[80px] pointer-events-none opacity-45"
         style={{
-          backgroundColor: profile.chaos > 70 ? '#ec4899' : profile.romance > 75 ? '#f43f5e' : '#06b6d4'
+          backgroundColor: profile.chaos > 70 ? '#fbcfe8' : profile.romance > 75 ? '#ffe4e6' : '#e0f2fe'
         }}
       />
 
-      {/* Real-time Swipe Intent Glow Stamps */}
+      {/* Real-time Swipe Intent Stamps */}
       {isTopCard && swipeIntent === 'right' && (
-        <div className="absolute top-8 left-8 z-30 transform -rotate-12 border-4 border-emerald-400 bg-emerald-950/80 text-emerald-300 font-black text-2xl sm:text-3xl px-4 py-1.5 rounded-2xl shadow-xl shadow-emerald-500/30 animate-pulse tracking-wider">
+        <div className="absolute top-8 left-8 z-30 transform -rotate-12 border-4 border-[#143d2b] bg-[#143d2b]/95 text-white font-serif font-black text-2xl sm:text-3xl px-4 py-1.5 rounded-2xl shadow-xl tracking-wider">
           ❤️ ACCEPT
         </div>
       )}
       {isTopCard && swipeIntent === 'left' && (
-        <div className="absolute top-8 right-8 z-30 transform rotate-12 border-4 border-rose-500 bg-rose-950/80 text-rose-300 font-black text-2xl sm:text-3xl px-4 py-1.5 rounded-2xl shadow-xl shadow-rose-500/30 animate-pulse tracking-wider">
-          ❌ REJECT
+        <div className="absolute top-8 right-8 z-30 transform rotate-12 border-4 border-rose-600 bg-rose-600 text-white font-serif font-black text-2xl sm:text-3xl px-4 py-1.5 rounded-2xl shadow-xl tracking-wider">
+          ❌ DISMISS
         </div>
       )}
 
-      {/* Top Header: Compatibility Pill & Archetype */}
+      {/* Top Header: Brand Pill & Compatibility Score */}
       <div className="relative z-10 flex items-center justify-between">
-        <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-bold text-slate-300">
-          <Sparkles className="w-3.5 h-3.5 text-pink-400" />
-          <span className="truncate max-w-[140px]">{profile.archetype}</span>
+        <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-[#faf7f2] border border-stone-200 text-xs font-mono text-stone-600 font-medium">
+          <span className="w-2 h-2 rounded-full bg-pink-400" />
+          <span className="truncate max-w-[130px]">{profile.archetype}</span>
         </div>
-        <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-300 text-xs font-extrabold shadow-sm">
-          <Heart className="w-3.5 h-3.5 text-pink-400 fill-pink-400" />
+        <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-pink-50 border border-pink-200 text-pink-900 text-xs font-mono font-bold shadow-2xs">
+          <Heart className="w-3.5 h-3.5 text-pink-500 fill-pink-500" />
           <span>{compatibility.score}% MATCH</span>
         </div>
       </div>
 
-      {/* Main Avatar Section */}
-      <div className="relative z-10 flex flex-col items-center justify-center my-2 text-center">
-        <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-b from-slate-800/80 to-slate-900/90 border border-slate-700 flex items-center justify-center text-7xl sm:text-8xl shadow-inner relative group">
-          <span className="filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transform hover:scale-110 transition-transform">
+      {/* Main Avatar Section: Warm Pedestal */}
+      <div className="relative z-10 flex flex-col items-center justify-center my-1 text-center">
+        <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-gradient-to-b from-[#fdfbf7] to-[#f4eee5] border-2 border-stone-200/80 flex items-center justify-center text-7xl sm:text-8xl shadow-[0_12px_24px_-8px_rgba(0,0,0,0.08)] relative group">
+          <span className="filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] transform hover:scale-110 transition-transform">
             {profile.emoji}
           </span>
           {profile.chaos > 80 && (
-            <span className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-md bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-widest flex items-center space-x-1 shadow-md">
-              <Zap className="w-3 h-3 fill-slate-950" />
+            <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-md bg-amber-400 text-stone-900 text-[10px] font-mono font-bold uppercase tracking-wider flex items-center space-x-1 shadow-sm">
+              <Zap className="w-3 h-3 fill-stone-900" />
               <span>CHAOTIC</span>
             </span>
           )}
         </div>
 
-        <h3 className="mt-4 text-2xl sm:text-3xl font-black tracking-tight text-white">
+        <h3 className="mt-3 text-2xl sm:text-3xl font-serif font-bold tracking-tight text-stone-900">
           {profile.name}
         </h3>
 
-        <p className="text-xs sm:text-sm text-pink-400 font-medium italic mt-0.5">
-          "{profile.personality}"
+        <p className="text-xs text-stone-500 font-mono mt-0.5">
+          {profile.archetype}
         </p>
       </div>
 
-      {/* Bio & Interests */}
-      <div className="relative z-10 space-y-3">
-        <p className="text-xs sm:text-sm text-slate-300 line-clamp-2 text-center px-2">
-          {profile.bio}
-        </p>
+      {/* Bio & Greeting Speech Bubble */}
+      <div className="relative z-10 p-3.5 rounded-2xl bg-[#faf7f2] border border-stone-200/80 text-xs text-stone-700 leading-relaxed font-serif italic text-center">
+        &ldquo;{profile.greeting}&rdquo;
+      </div>
 
-        {/* Interests Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5">
-          {profile.interests.slice(0, 4).map((interest, idx) => (
-            <span
-              key={idx}
-              className="text-[11px] font-semibold px-2.5 py-1 rounded-xl bg-slate-800/90 text-slate-300 border border-slate-700/60"
-            >
-              {interest}
-            </span>
-          ))}
+      {/* Trait Gauges: Clean Editorial Lines */}
+      <div className="relative z-10 space-y-2 py-1">
+        <div className="flex items-center justify-between text-[11px] font-mono text-stone-500">
+          <span>Romance Factor</span>
+          <span className="font-semibold text-stone-800">{profile.romance}%</span>
+        </div>
+        <div className="w-full h-1.5 bg-stone-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-pink-500 rounded-full"
+            style={{ width: `${profile.romance}%` }}
+          />
+        </div>
+
+        <div className="flex items-center justify-between text-[11px] font-mono text-stone-500 pt-1">
+          <span>Humor Saturation</span>
+          <span className="font-semibold text-stone-800">{profile.humor}%</span>
+        </div>
+        <div className="w-full h-1.5 bg-stone-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-amber-500 rounded-full"
+            style={{ width: `${profile.humor}%` }}
+          />
+        </div>
+
+        <div className="flex items-center justify-between text-[11px] font-mono text-stone-500 pt-1">
+          <span>Entropy / Chaos</span>
+          <span className="font-semibold text-stone-800">{profile.chaos}%</span>
+        </div>
+        <div className="w-full h-1.5 bg-stone-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-[#143d2b] rounded-full"
+            style={{ width: `${profile.chaos}%` }}
+          />
         </div>
       </div>
 
-      {/* Overengineered Statistical Spectrum */}
-      <div className="relative z-10 bg-slate-950/60 rounded-2xl p-3 border border-slate-800/80 space-y-1.5">
-        <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
-          <span>STATISTICAL TRAIT MATRIX</span>
-          <span className="text-cyan-400 font-bold">{compatibility.verdict}</span>
-        </div>
-
-        <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">
-          <div>
-            <div className="flex justify-between text-slate-400 mb-0.5">
-              <span>Confidence</span>
-              <span className="text-slate-200">{profile.confidence}%</span>
-            </div>
-            <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-              <div className="bg-cyan-400 h-full rounded-full" style={{ width: `${profile.confidence}%` }} />
-            </div>
-          </div>
-          <div>
-            <div className="flex justify-between text-slate-400 mb-0.5">
-              <span>Chaos Index</span>
-              <span className="text-pink-400 font-bold">{profile.chaos}%</span>
-            </div>
-            <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-              <div className="bg-pink-500 h-full rounded-full" style={{ width: `${profile.chaos}%` }} />
-            </div>
-          </div>
-          <div>
-            <div className="flex justify-between text-slate-400 mb-0.5">
-              <span>Romance</span>
-              <span className="text-slate-200">{profile.romance}%</span>
-            </div>
-            <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-              <div className="bg-rose-400 h-full rounded-full" style={{ width: `${profile.romance}%` }} />
-            </div>
-          </div>
-          <div>
-            <div className="flex justify-between text-slate-400 mb-0.5">
-              <span>Humor</span>
-              <span className="text-slate-200">{profile.humor}%</span>
-            </div>
-            <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-              <div className="bg-amber-400 h-full rounded-full" style={{ width: `${profile.humor}%` }} />
-            </div>
-          </div>
-        </div>
-
-        <div className="pt-1 flex items-center space-x-1.5 text-[10px] text-slate-400 italic">
-          <ShieldAlert className="w-3 h-3 text-pink-400 flex-shrink-0" />
-          <span className="truncate">{compatibility.summary}</span>
-        </div>
+      {/* Interests Badges */}
+      <div className="relative z-10 flex flex-wrap gap-1.5 justify-center pt-1 border-t border-stone-100">
+        {profile.interests.slice(0, 3).map((interest, idx) => (
+          <span
+            key={idx}
+            className="px-2 py-0.5 rounded-full bg-white border border-stone-200 text-[10px] font-mono text-stone-600"
+          >
+            {interest}
+          </span>
+        ))}
       </div>
 
     </div>

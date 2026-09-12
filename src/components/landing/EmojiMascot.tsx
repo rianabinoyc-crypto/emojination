@@ -140,13 +140,13 @@ export const EmojiMascot = forwardRef<HTMLDivElement, EmojiMascotProps>(({
       </div>
 
       {/* Living Mascot Mood Sub-Badge */}
-      <div className="mt-3.5 flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900/80 border border-white/10 backdrop-blur-md shadow-lg transition-all duration-300">
+      <div className="mt-3.5 flex items-center space-x-2 px-3 py-1 rounded-full bg-white/90 border border-[#e5dcce] shadow-sm transition-all duration-300">
         <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#143d2b]"></span>
         </span>
-        <span className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-slate-300">
-          Status: <span className={`bg-gradient-to-r ${mood.color} bg-clip-text text-transparent font-bold`}>{mood.label}</span>
+        <span className="text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase text-stone-700">
+          Status: <span className="text-[#143d2b] font-serif font-black">{mood.label}</span>
         </span>
       </div>
     </div>

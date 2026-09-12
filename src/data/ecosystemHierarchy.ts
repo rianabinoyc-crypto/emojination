@@ -4,12 +4,15 @@ export interface EcosystemAppMeta {
   id: string;
   pillarId: EcosystemPillarId;
   number: string;
+  brandName: string;
   title: string;
   shortTitle: string;
   emoji: string;
   tagline: string;
   technicalSubtext: string;
-  accent: string;
+  accentBg: string;
+  accentText: string;
+  accentBorder: string;
   route: string;
 }
 
@@ -20,9 +23,12 @@ export interface EcosystemPillarMeta {
   code: string;
   headline: string;
   description: string;
-  gradient: string;
-  borderAccent: string;
-  textAccent: string;
+  pillarTheme: {
+    bg: string;
+    text: string;
+    border: string;
+    pill: string;
+  };
   apps: EcosystemAppMeta[];
 }
 
@@ -34,44 +40,56 @@ export const ECOSYSTEM_HIERARCHY: Record<EcosystemPillarId, EcosystemPillarMeta>
     code: 'PLR-01',
     headline: 'Quantum Romance & Social Mechanics',
     description: 'Solving the completely unnecessary problem of emoji relationships through ISO-9001 compliant reciprocal chemistry matching.',
-    gradient: 'from-pink-500 via-rose-500 to-red-500',
-    borderAccent: 'border-pink-500/40',
-    textAccent: 'text-pink-400',
+    pillarTheme: {
+      bg: 'bg-[#fdf2f8]',
+      text: 'text-pink-900',
+      border: 'border-pink-300',
+      pill: 'bg-pink-100 text-pink-800 border-pink-200',
+    },
     apps: [
       {
         id: 'dating',
         pillarId: 'CONNECT',
         number: '01.1',
+        brandName: 'EMOJI-FLIRT™',
         title: 'Emoji Dating Corner',
-        shortTitle: 'Dating',
+        shortTitle: 'Flirt',
         emoji: '💘',
-        tagline: 'Reciprocal Chemistry Swipe Deck',
+        tagline: 'Quantum Romance Swipe Matrix',
         technicalSubtext: 'Non-Euclidean Swipe Physics & Algorithmic Mutual Consensus',
-        accent: 'from-pink-500 to-rose-500',
+        accentBg: 'bg-rose-50',
+        accentText: 'text-rose-900',
+        accentBorder: 'border-rose-200',
         route: 'dating',
       },
       {
         id: 'matches',
         pillarId: 'CONNECT',
         number: '01.2',
+        brandName: 'PAIR-OS™',
         title: 'Neural Matches Hub',
         shortTitle: 'Matches',
         emoji: '💕',
-        tagline: 'Confirmed Romantic Pairs',
+        tagline: 'Confirmed Soulmate Diagnostics',
         technicalSubtext: 'Mutual Consensus Dossier & Active Chemistry Monitors',
-        accent: 'from-rose-500 to-pink-600',
+        accentBg: 'bg-pink-50',
+        accentText: 'text-pink-900',
+        accentBorder: 'border-pink-200',
         route: 'matches',
       },
       {
         id: 'personalities',
         pillarId: 'CONNECT',
         number: '01.3',
+        brandName: 'PERSONA-FORGE™',
         title: '50+ Archetype Forge',
-        shortTitle: 'Personalities',
+        shortTitle: 'Personas',
         emoji: '🧠',
-        tagline: 'Psychological Personality Directory',
+        tagline: 'Linguistic Psychology Lab',
         technicalSubtext: 'Multi-Variate Archetype Sliders & Custom Personality Synthesis',
-        accent: 'from-purple-500 to-indigo-600',
+        accentBg: 'bg-purple-50',
+        accentText: 'text-purple-900',
+        accentBorder: 'border-purple-200',
         route: 'personalities',
       },
     ],
@@ -83,44 +101,56 @@ export const ECOSYSTEM_HIERARCHY: Record<EcosystemPillarId, EcosystemPillarMeta>
     code: 'PLR-02',
     headline: 'Autonomous Dialogue & Linguistic Synthesis',
     description: 'Bypassing human alphabetical limitations with simulated autonomous AI messaging, cryptic ciphers, and mixology.',
-    gradient: 'from-cyan-500 via-blue-500 to-indigo-500',
-    borderAccent: 'border-cyan-500/40',
-    textAccent: 'text-cyan-400',
+    pillarTheme: {
+      bg: 'bg-[#f0f9ff]',
+      text: 'text-sky-900',
+      border: 'border-sky-300',
+      pill: 'bg-sky-100 text-sky-800 border-sky-200',
+    },
     apps: [
       {
         id: 'chat',
         pillarId: 'EXPRESS',
         number: '02.1',
+        brandName: 'EMOJI-TALK™',
         title: 'Simulated AI Chat',
         shortTitle: 'Chat',
         emoji: '💬',
         tagline: 'Autonomous Conversational Dialogue',
         technicalSubtext: '20+ Simulated Emotional States with Stochastic Typing Latency',
-        accent: 'from-cyan-500 to-blue-500',
+        accentBg: 'bg-sky-50',
+        accentText: 'text-sky-900',
+        accentBorder: 'border-sky-200',
         route: 'chat',
       },
       {
         id: 'tools',
         pillarId: 'EXPRESS',
         number: '02.2',
+        brandName: 'EMOJI-LAB™',
         title: 'Mixology & Tools Suite',
-        shortTitle: 'Tools',
+        shortTitle: 'Studio',
         emoji: '🎨',
-        tagline: 'Emoji Synthesis & Cryptography',
+        tagline: 'Chemical Emoji Synthesizer & Ciphers',
         technicalSubtext: 'Semantic Text-to-Emoji Translators, Horoscopes & Cipher Encoders',
-        accent: 'from-amber-500 to-orange-500',
+        accentBg: 'bg-amber-50',
+        accentText: 'text-amber-900',
+        accentBorder: 'border-amber-200',
         route: 'tools',
       },
       {
         id: 'encyclopedia',
         pillarId: 'EXPRESS',
         number: '02.3',
+        brandName: 'EMOJI-PEDIA™',
         title: 'Unicode Lexicon & Lore',
-        shortTitle: 'Encyclopedia',
+        shortTitle: 'Codex',
         emoji: '📖',
         tagline: 'Historical Etymology Codex',
         technicalSubtext: 'Comprehensive Unicode 16.0 Metadata & Cross-Cultural Semiotics',
-        accent: 'from-indigo-500 to-sky-500',
+        accentBg: 'bg-indigo-50',
+        accentText: 'text-indigo-900',
+        accentBorder: 'border-indigo-200',
         route: 'encyclopedia',
       },
     ],
@@ -132,44 +162,56 @@ export const ECOSYSTEM_HIERARCHY: Record<EcosystemPillarId, EcosystemPillarMeta>
     code: 'PLR-03',
     headline: 'Bio-Telemetry, Dopamine & Empirical Data',
     description: 'Empirical body health, sleep cycles, carbon footprint, and gamified karma tracked with absurd scientific precision.',
-    gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
-    borderAccent: 'border-emerald-500/40',
-    textAccent: 'text-emerald-400',
+    pillarTheme: {
+      bg: 'bg-[#f0fdf4]',
+      text: 'text-emerald-900',
+      border: 'border-emerald-300',
+      pill: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    },
     apps: [
       {
         id: 'health',
         pillarId: 'TRACK',
         number: '03.1',
+        brandName: 'EMOJI-FIT™',
         title: 'Emoji Health & Vitals',
-        shortTitle: 'Health',
+        shortTitle: 'Vitals',
         emoji: '❤️',
-        tagline: 'Bio-Telemetry & Fitness Record',
+        tagline: 'Absurd Bio-Telemetry & Sleep Math',
         technicalSubtext: '72 BPM Animated Vitals, Step Tracker, Hydration & Sleep Math',
-        accent: 'from-rose-500 to-emerald-500',
+        accentBg: 'bg-emerald-50',
+        accentText: 'text-emerald-900',
+        accentBorder: 'border-emerald-200',
         route: 'health',
       },
       {
         id: 'analytics',
         pillarId: 'TRACK',
         number: '03.2',
+        brandName: 'DATA-PULSE™',
         title: 'Empirical Telemetry',
-        shortTitle: 'Analytics',
+        shortTitle: 'Telemetry',
         emoji: '📊',
-        tagline: 'Absurd Relationship Statistics',
+        tagline: 'Dopamine Saturation & Telemetry',
         technicalSubtext: 'Dopamine Saturation Curves, Carbon Footprint & Message Densities',
-        accent: 'from-teal-500 to-cyan-500',
+        accentBg: 'bg-teal-50',
+        accentText: 'text-teal-900',
+        accentBorder: 'border-teal-200',
         route: 'analytics',
       },
       {
         id: 'achievements',
         pillarId: 'TRACK',
         number: '03.3',
+        brandName: 'QUEST-VAULT™',
         title: 'Karma & Achievements',
-        shortTitle: 'Achievements',
+        shortTitle: 'Quests',
         emoji: '🏆',
-        tagline: 'Gamified Quests & Trophy Hall',
+        tagline: 'Gamified Karma & Trophy Hall',
         technicalSubtext: 'Sub-Atomic XP Leveling, Daily Quests & Sound Chimes',
-        accent: 'from-yellow-400 to-amber-500',
+        accentBg: 'bg-amber-50',
+        accentText: 'text-amber-900',
+        accentBorder: 'border-amber-200',
         route: 'achievements',
       },
     ],

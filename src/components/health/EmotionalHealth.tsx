@@ -1,5 +1,4 @@
 import React from 'react';
-import { Smile, Heart, Zap, Skull, ShieldAlert } from 'lucide-react';
 
 interface EmotionalMetrics {
   happiness: number;
@@ -26,24 +25,24 @@ export const EmotionalHealth: React.FC<EmotionalHealthProps> = ({
   };
 
   const sliders: { key: keyof EmotionalMetrics; label: string; emoji: string; color: string }[] = [
-    { key: 'happiness', label: 'Happiness', emoji: '😊', color: 'accent-amber-400' },
-    { key: 'energy', label: 'Energy Level', emoji: '⚡', color: 'accent-cyan-400' },
+    { key: 'happiness', label: 'Happiness Quotient', emoji: '😊', color: 'accent-amber-500' },
+    { key: 'energy', label: 'Synaptic Energy', emoji: '⚡', color: 'accent-sky-600' },
     { key: 'romance', label: 'Romance Sentiment', emoji: '❤️', color: 'accent-rose-500' },
-    { key: 'chaos', label: 'Chaos Entropy', emoji: '💀', color: 'accent-purple-500' },
-    { key: 'stress', label: 'Stress Index', emoji: '😌', color: 'accent-pink-500' }
+    { key: 'chaos', label: 'Chaos Entropy', emoji: '🔥', color: 'accent-orange-600' },
+    { key: 'stress', label: 'Stress Buffer', emoji: '😌', color: 'accent-emerald-600' }
   ];
 
   return (
-    <div className="p-6 rounded-3xl glass-panel border border-slate-800 space-y-6 bg-slate-900/80">
+    <div className="p-6 rounded-3xl bg-white border border-[#e5dcce] space-y-6 shadow-xs">
       
       {/* Title */}
       <div className="flex items-center space-x-3">
-        <div className="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center text-xl">
+        <div className="w-10 h-10 rounded-2xl bg-[#faf7f2] border border-[#e5dcce] flex items-center justify-center text-xl shadow-xs">
           🧠
         </div>
         <div>
-          <h3 className="text-base font-extrabold text-white">EMOTIONAL HEALTH</h3>
-          <p className="text-xs text-slate-400">Tune your psychological and synaptic bandwidth sliders</p>
+          <h3 className="text-base font-serif font-bold text-stone-900">Emotional Spectrum</h3>
+          <p className="text-xs text-stone-600">Tune your psychological and synaptic bandwidth sliders</p>
         </div>
       </div>
 
@@ -51,12 +50,12 @@ export const EmotionalHealth: React.FC<EmotionalHealthProps> = ({
       <div className="space-y-4">
         {sliders.map((s) => (
           <div key={s.key} className="space-y-1.5">
-            <div className="flex items-center justify-between text-xs font-mono">
-              <span className="flex items-center space-x-1.5 text-slate-300">
+            <div className="flex items-center justify-between text-xs">
+              <span className="flex items-center space-x-2 text-stone-700">
                 <span className="text-base">{s.emoji}</span>
-                <span>{s.label}</span>
+                <span className="font-medium">{s.label}</span>
               </span>
-              <span className="font-bold text-white">{emotional[s.key]}%</span>
+              <span className="font-mono font-bold text-stone-900">{emotional[s.key]}%</span>
             </div>
             <input
               type="range"
@@ -64,13 +63,13 @@ export const EmotionalHealth: React.FC<EmotionalHealthProps> = ({
               max="100"
               value={emotional[s.key]}
               onChange={(e) => handleChange(s.key, parseInt(e.target.value, 10))}
-              className={`w-full h-2 bg-slate-950 rounded-lg cursor-pointer ${s.color}`}
+              className={`w-full h-2 bg-[#f0eae1] rounded-lg cursor-pointer ${s.color}`}
             />
           </div>
         ))}
       </div>
 
-      <div className="p-3 rounded-2xl bg-slate-950/60 border border-slate-800 text-[11px] text-slate-400 italic">
+      <div className="p-3.5 rounded-2xl bg-[#faf7f2] border border-[#e5dcce] text-xs text-stone-600 italic">
         "Adjusting emotional metrics directly influences your overall Dynamic Health Score and compatibility algorithms."
       </div>
 

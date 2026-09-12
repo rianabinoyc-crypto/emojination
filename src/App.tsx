@@ -43,7 +43,6 @@ import { AnalyticsDashboard } from './components/analytics/AnalyticsDashboard';
 import { EncyclopediaView } from './components/encyclopedia/EncyclopediaView';
 import { UserProfileView } from './components/profile/UserProfileView';
 import { SettingsView } from './components/settings/SettingsView';
-import { EcosystemPillarBar } from './components/common/EcosystemPillarBar';
 import { CommandPalette } from './components/common/CommandPalette';
 
 export function App() {
@@ -599,7 +598,7 @@ export function App() {
   }, [messages]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-pink-500 selection:text-white font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="min-h-screen flex flex-col bg-[#fdfbf7] text-stone-800 selection:bg-amber-200 selection:text-stone-900 font-['Plus_Jakarta_Sans',sans-serif]">
       
       {/* LANDING PAGE (Minimal ecosystem entrance, strictly NO previews of dating/chat) */}
       {currentRoute === 'landing' ? (
@@ -633,13 +632,6 @@ export function App() {
               storageService.saveSettings(updated);
             }}
             onGoHome={() => navigateTo('landing')}
-            onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
-          />
-
-          {/* Overengineered Ecosystem Pillar Breadcrumbs & Telemetry HUD */}
-          <EcosystemPillarBar
-            currentRoute={currentRoute}
-            onNavigate={navigateTo}
             onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
           />
 

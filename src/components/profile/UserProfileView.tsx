@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UserProfile, AnalyticsStats, GamificationState } from '../../types';
-import { User, Edit3, Sparkles, Check, Heart, Trophy, Flame, Activity } from 'lucide-react';
+import { User, Edit3, Sparkles, Check, Heart, Trophy, Flame, Activity, ShieldCheck, Fingerprint } from 'lucide-react';
 
 const EMOJI_AVATAR_OPTIONS = ['😎', '🥰', '😂', '🥺', '😈', '🤓', '😴', '🤠', '🧐', '🥶', '🤪', '😇', '👽', '🤖', '💀', '🤑', '😤', '🥳', '😭', '😍', '🙃', '🤯', '🫠', '😏', '🤨', '🦄', '🥑', '👾', '🚀'];
 
@@ -46,41 +46,46 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
   const levelProgressPct = Math.min(100, Math.round((gamification.currentXp / Math.max(1, gamification.xpForNextLevel)) * 100));
 
   return (
-    <div className="max-w-4xl mx-auto py-6 px-4 space-y-6 animate-in fade-in duration-150">
+    <div className="max-w-4xl mx-auto py-6 px-4 space-y-6 animate-in fade-in duration-150 text-stone-800">
       
-      {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-        <div className="flex items-center space-x-2">
-          <User className="w-6 h-6 text-pink-500" />
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            YOUR EMOJINATION PROFILE
-          </h1>
+      {/* Header & Subsystem Identity */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e5dcce]">
+        <div>
+          <div className="flex items-center space-x-3">
+            <Fingerprint className="w-7 h-7 text-[#143d2b]" />
+            <h1 className="text-3xl sm:text-4xl font-serif text-[#143d2b] tracking-tight">
+              User Profile
+            </h1>
+          </div>
+          <p className="text-xs sm:text-sm text-stone-600 mt-1">
+            Your emoji identity, personal preferences, and activity statistics.
+          </p>
         </div>
 
         <button
           onClick={() => setIsEditing(!isEditing)}
-          className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition-all"
+          className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-white hover:bg-[#faf7f2] text-stone-700 text-xs font-bold border border-[#e5dcce] shadow-xs transition-all self-start sm:self-auto"
         >
           <Edit3 className="w-3.5 h-3.5" />
-          <span>{isEditing ? 'Cancel Edit' : 'Edit Profile'}</span>
+          <span>{isEditing ? 'Cancel Edit' : 'Edit Credentials'}</span>
         </button>
       </div>
 
-      {/* Main Profile Showcase Card */}
-      <div className="p-6 sm:p-8 rounded-3xl glass-panel-glow bg-slate-900/90 border border-slate-700/80 shadow-2xl relative overflow-hidden">
+      {/* Main Profile Showcase Card / Passport */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#e5dcce] shadow-md relative overflow-hidden">
         
-        {/* Ambient background glow */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-pink-500/20 via-purple-500/10 to-transparent rounded-full blur-[90px] pointer-events-none" />
+        {/* Subtle decorative background watermarks */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#faf7f2] rounded-full -mr-20 -mt-20 pointer-events-none -z-0" />
 
         {isEditing ? (
           /* Edit Form */
           <form onSubmit={handleSave} className="space-y-4 relative z-10">
-            <h3 className="text-base font-extrabold text-white">Customize Your Persona</h3>
+            <h3 className="text-base font-serif font-bold text-[#143d2b]">Re-calibrate Citizen Persona</h3>
 
             {/* Favorite Emoji Picker */}
             <div>
-              <label className="text-xs font-mono text-slate-400 block mb-1">Select Favorite Emoji Avatar:</label>
-              <div className="flex flex-wrap gap-2 p-3 rounded-2xl bg-slate-950/80 border border-slate-800">
+              <label className="text-xs font-mono text-stone-500 block mb-1">Select Official Avatar Specimen:</label>
+              <div className="flex flex-wrap gap-2 p-3 rounded-2xl bg-[#faf7f2] border border-[#e5dcce]">
                 {EMOJI_AVATAR_OPTIONS.map((e) => (
                   <button
                     key={e}
@@ -88,8 +93,8 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
                     onClick={() => setFavoriteEmoji(e)}
                     className={`w-10 h-10 rounded-xl text-xl flex items-center justify-center transition-all ${
                       favoriteEmoji === e
-                        ? 'bg-pink-500/30 border-2 border-pink-500 scale-110 shadow-lg'
-                        : 'hover:bg-slate-800'
+                        ? 'bg-[#143d2b] text-white scale-110 shadow-md ring-2 ring-[#143d2b]'
+                        : 'bg-white hover:bg-stone-100 border border-[#e5dcce]'
                     }`}
                   >
                     {e}
@@ -100,45 +105,45 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-mono text-slate-400 block mb-1">Username:</label>
+                <label className="text-xs font-mono text-stone-500 block mb-1">Citizen Call-Sign / Username:</label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full bg-slate-950 text-slate-100 rounded-xl px-3.5 py-2.5 text-sm border border-slate-800 focus:border-pink-500"
+                  className="w-full bg-[#faf7f2] text-stone-900 rounded-xl px-3.5 py-2.5 text-sm border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
                   required
                 />
               </div>
 
               <div>
-                <label className="text-xs font-mono text-slate-400 block mb-1">Emoji Personality Archetype:</label>
+                <label className="text-xs font-mono text-stone-500 block mb-1">Personality Archetype:</label>
                 <input
                   type="text"
                   value={archetype}
                   onChange={(e) => setArchetype(e.target.value)}
-                  className="w-full bg-slate-950 text-slate-100 rounded-xl px-3.5 py-2.5 text-sm border border-slate-800 focus:border-pink-500"
+                  className="w-full bg-[#faf7f2] text-stone-900 rounded-xl px-3.5 py-2.5 text-sm border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-mono text-slate-400 block mb-1">Tagline:</label>
+              <label className="text-xs font-mono text-stone-500 block mb-1">Manifesto Tagline:</label>
               <input
                 type="text"
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
-                className="w-full bg-slate-950 text-slate-100 rounded-xl px-3.5 py-2.5 text-sm border border-slate-800 focus:border-pink-500"
+                className="w-full bg-[#faf7f2] text-stone-900 rounded-xl px-3.5 py-2.5 text-sm border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
               />
             </div>
 
             <div>
-              <label className="text-xs font-mono text-slate-400 block mb-1">Bio:</label>
+              <label className="text-xs font-mono text-stone-500 block mb-1">Biographical Abstract:</label>
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 rows={3}
-                className="w-full bg-slate-950 text-slate-100 rounded-xl px-3.5 py-2.5 text-sm border border-slate-800 focus:border-pink-500"
+                className="w-full bg-[#faf7f2] text-stone-900 rounded-xl px-3.5 py-2.5 text-sm border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
               />
             </div>
 
@@ -146,16 +151,16 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                className="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold"
+                className="px-5 py-2 rounded-xl bg-white border border-[#e5dcce] text-stone-600 hover:bg-[#faf7f2] text-xs font-bold"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-6 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-cyan-500 text-white text-xs font-extrabold shadow-md flex items-center space-x-1.5"
+                className="px-6 py-2 rounded-xl bg-[#143d2b] hover:bg-[#0f2e20] text-white text-xs font-bold shadow-sm flex items-center space-x-1.5"
               >
                 <Check className="w-4 h-4" />
-                <span>Save Persona</span>
+                <span>Save Credentials</span>
               </button>
             </div>
           </form>
@@ -163,47 +168,47 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
           /* View Profile */
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10">
             {/* Big Avatar */}
-            <div className="relative group">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-slate-800/90 border-2 border-pink-500/50 flex items-center justify-center text-6xl sm:text-7xl shadow-2xl shadow-pink-500/20 transform hover:scale-105 transition-transform">
+            <div className="relative group flex-shrink-0">
+              <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-[#faf7f2] border-2 border-[#143d2b]/30 flex items-center justify-center text-6xl sm:text-7xl shadow-inner transform group-hover:scale-105 transition-transform">
                 {userProfile.favoriteEmoji}
               </div>
-              <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-pink-900 text-pink-200 border border-pink-700 whitespace-nowrap">
-                {userProfile.archetype.toUpperCase()}
+              <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#143d2b] text-white tracking-widest whitespace-nowrap shadow-xs uppercase">
+                {userProfile.archetype}
               </span>
             </div>
 
             {/* Profile Text */}
-            <div className="flex-1 text-center sm:text-left space-y-2">
+            <div className="flex-1 text-center sm:text-left space-y-2.5 min-w-0">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-white">
+                  <h2 className="text-2xl sm:text-3xl font-serif font-bold text-stone-900">
                     {userProfile.username}
                   </h2>
-                  <p className="text-xs sm:text-sm text-pink-400 font-semibold">
+                  <p className="text-xs sm:text-sm text-[#143d2b] font-medium font-mono">
                     {userProfile.tagline}
                   </p>
                 </div>
 
-                <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 text-xs font-mono font-bold self-center sm:self-start">
-                  <Trophy className="w-3.5 h-3.5" />
-                  <span>Level {gamification.level} Pioneer</span>
+                <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-300 text-xs font-mono font-bold self-center sm:self-start shadow-xs">
+                  <Trophy className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Level {gamification.level}</span>
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
-                {userProfile.bio}
+              <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-serif italic max-w-xl">
+                "{userProfile.bio}"
               </p>
 
               {/* XP Progress */}
               <div className="pt-2 max-w-md space-y-1">
-                <div className="flex justify-between text-[11px] font-mono text-slate-400">
+                <div className="flex justify-between text-[11px] font-mono text-stone-500">
                   <span>XP Progress</span>
-                  <span className="text-yellow-400 font-bold">
+                  <span className="text-[#143d2b] font-bold">
                     {gamification.currentXp.toLocaleString()} / {gamification.xpForNextLevel.toLocaleString()} XP
                   </span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-slate-950 overflow-hidden border border-slate-800">
-                  <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${levelProgressPct}%` }} />
+                <div className="w-full h-2 rounded-full bg-[#e5dcce] overflow-hidden">
+                  <div className="h-full bg-[#143d2b] rounded-full transition-all duration-300" style={{ width: `${levelProgressPct}%` }} />
                 </div>
               </div>
 
@@ -212,7 +217,7 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
                 {userProfile.interests.map((it, idx) => (
                   <span
                     key={idx}
-                    className="text-xs px-2.5 py-1 rounded-xl bg-slate-800/90 text-slate-200 border border-slate-700/80"
+                    className="text-xs px-2.5 py-1 rounded-xl bg-[#faf7f2] text-stone-700 border border-[#e5dcce]"
                   >
                     {it}
                   </span>
@@ -224,52 +229,52 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
 
       </div>
 
-      {/* Ecosystem Metrics Grid (Health, Matches, Messages, Streaks, Achievements) */}
+      {/* Ecosystem Metrics Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         
-        <div className="p-4 rounded-2xl glass-panel border border-slate-800 text-center space-y-1">
-          <div className="flex items-center justify-center space-x-1 text-rose-400 text-xs font-mono">
-            <Activity className="w-3.5 h-3.5" />
+        <div className="p-4 rounded-2xl bg-white border border-[#e5dcce] text-center space-y-1 shadow-xs">
+          <div className="flex items-center justify-center space-x-1 text-stone-500 text-xs font-mono">
+            <Activity className="w-3.5 h-3.5 text-emerald-600" />
             <span>Health Score</span>
           </div>
-          <div className="text-2xl font-black text-white font-mono">{healthScore}</div>
-          <span className="text-[10px] text-rose-300 font-bold">EXCELLENT</span>
+          <div className="text-2xl font-serif font-bold text-[#143d2b]">{healthScore}</div>
+          <span className="text-[10px] font-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded font-bold">OPTIMAL</span>
         </div>
 
-        <div className="p-4 rounded-2xl glass-panel border border-slate-800 text-center space-y-1">
-          <div className="flex items-center justify-center space-x-1 text-pink-400 text-xs font-mono">
-            <Heart className="w-3.5 h-3.5" />
-            <span>Matches</span>
+        <div className="p-4 rounded-2xl bg-white border border-[#e5dcce] text-center space-y-1 shadow-xs">
+          <div className="flex items-center justify-center space-x-1 text-stone-500 text-xs font-mono">
+            <Heart className="w-3.5 h-3.5 text-rose-600" />
+            <span>Pair Bonds</span>
           </div>
-          <div className="text-2xl font-black text-pink-400 font-mono">{stats.matchesFormed}</div>
-          <span className="text-[10px] text-slate-400 font-mono">{stats.profilesAccepted} Accepted</span>
+          <div className="text-2xl font-serif font-bold text-stone-900">{stats.matchesFormed}</div>
+          <span className="text-[10px] text-stone-500 font-mono">{stats.profilesAccepted} Accepted</span>
         </div>
 
-        <div className="p-4 rounded-2xl glass-panel border border-slate-800 text-center space-y-1">
-          <div className="flex items-center justify-center space-x-1 text-cyan-400 text-xs font-mono">
+        <div className="p-4 rounded-2xl bg-white border border-[#e5dcce] text-center space-y-1 shadow-xs">
+          <div className="flex items-center justify-center space-x-1 text-stone-500 text-xs font-mono">
             <span>💬</span>
             <span>Messages</span>
           </div>
-          <div className="text-2xl font-black text-white font-mono">{stats.messagesSent}</div>
-          <span className="text-[10px] text-cyan-300 font-mono">{stats.emojisSent} Emojis</span>
+          <div className="text-2xl font-serif font-bold text-stone-900">{stats.messagesSent}</div>
+          <span className="text-[10px] text-stone-500 font-mono">{stats.emojisSent} Glyphs Sent</span>
         </div>
 
-        <div className="p-4 rounded-2xl glass-panel border border-slate-800 text-center space-y-1">
-          <div className="flex items-center justify-center space-x-1 text-amber-400 text-xs font-mono">
-            <Flame className="w-3.5 h-3.5" />
+        <div className="p-4 rounded-2xl bg-white border border-[#e5dcce] text-center space-y-1 shadow-xs">
+          <div className="flex items-center justify-center space-x-1 text-stone-500 text-xs font-mono">
+            <Flame className="w-3.5 h-3.5 text-amber-600" />
             <span>Streak</span>
           </div>
-          <div className="text-2xl font-black text-amber-400 font-mono">{gamification.streakDays}d</div>
-          <span className="text-[10px] text-slate-400 font-mono">Daily Activity</span>
+          <div className="text-2xl font-serif font-bold text-amber-700">{gamification.streakDays}d</div>
+          <span className="text-[10px] text-stone-500 font-mono">Continuous Sync</span>
         </div>
 
-        <div className="p-4 rounded-2xl glass-panel border border-slate-800 text-center space-y-1">
-          <div className="flex items-center justify-center space-x-1 text-yellow-400 text-xs font-mono">
-            <Trophy className="w-3.5 h-3.5" />
-            <span>Trophies</span>
+        <div className="p-4 rounded-2xl bg-white border border-[#e5dcce] text-center space-y-1 shadow-xs">
+          <div className="flex items-center justify-center space-x-1 text-stone-500 text-xs font-mono">
+            <Trophy className="w-3.5 h-3.5 text-amber-600" />
+            <span>Distinctions</span>
           </div>
-          <div className="text-2xl font-black text-yellow-400 font-mono">{achievementsCount} / {totalAchievements}</div>
-          <span className="text-[10px] text-slate-400 font-mono">Unlocked</span>
+          <div className="text-2xl font-serif font-bold text-stone-900">{achievementsCount} / {totalAchievements}</div>
+          <span className="text-[10px] text-stone-500 font-mono">Vault Badges</span>
         </div>
 
       </div>

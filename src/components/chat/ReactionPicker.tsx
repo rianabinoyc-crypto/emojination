@@ -26,7 +26,7 @@ export const ReactionPicker: React.FC<ReactionPickerProps> = ({
   return (
     <div
       ref={ref}
-      className="flex items-center space-x-1 p-1.5 rounded-2xl glass-panel-glow bg-slate-900/95 border border-slate-700 shadow-2xl z-30 animate-in fade-in zoom-in-95 duration-100"
+      className="flex items-center space-x-1 p-1.5 rounded-2xl bg-white border border-[#e5dcce] shadow-xl z-30 animate-in fade-in zoom-in-95 duration-100"
     >
       {SUPPORTED_REACTIONS.map((emoji) => (
         <button
@@ -35,7 +35,7 @@ export const ReactionPicker: React.FC<ReactionPickerProps> = ({
             onSelectReaction(emoji);
             onClose();
           }}
-          className="w-8 h-8 rounded-xl flex items-center justify-center text-lg hover:scale-125 hover:bg-slate-800/80 active:scale-95 transition-all"
+          className="w-8 h-8 rounded-xl flex items-center justify-center text-lg hover:scale-125 hover:bg-[#faf7f2] active:scale-95 transition-all"
         >
           {emoji}
         </button>

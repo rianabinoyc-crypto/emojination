@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { EmojiProfile, PersonalityCategory } from '../../types';
-import { X, Sparkles, Plus, Check } from 'lucide-react';
+import { X, Sparkles, Check } from 'lucide-react';
 
 const AVATAR_OPTIONS = [
   '🤠', '🥷', '🦄', '🦖', '🐉', '🧙', '🧛', '🧜', '🧝', '🧞', 
@@ -74,23 +74,26 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl animate-in fade-in duration-150">
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 glass-panel-glow bg-slate-900 border border-purple-500/40 shadow-2xl text-slate-100 space-y-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-sm animate-in fade-in duration-150">
+      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 bg-[#fdfbf7] border-2 border-[#143d2b] shadow-2xl text-stone-900 space-y-5">
         
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-          <div className="flex items-center space-x-2.5">
-            <Sparkles className="w-5 h-5 text-purple-400" />
-            <h2 className="text-xl font-black text-white">
-              CREATE YOUR OWN EMOJI PERSONALITY
+        <div className="flex items-center justify-between pb-4 border-b border-[#e5dcce]">
+          <div>
+            <div className="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-[#143d2b]/10 text-[#143d2b] text-xs font-mono mb-1">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>SYNAPSE SYNTHESIZER</span>
+            </div>
+            <h2 className="text-2xl font-serif font-bold text-stone-900">
+              Forge Bespoke Persona
             </h2>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+            className="p-1.5 rounded-full hover:bg-stone-200 text-stone-500 hover:text-stone-900 transition-colors border border-[#e5dcce]"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
@@ -98,8 +101,8 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
           
           {/* Avatar Selector */}
           <div>
-            <label className="text-[11px] font-mono text-slate-400 block mb-1">Pick Avatar Glyph:</label>
-            <div className="flex flex-wrap gap-1.5 p-3 rounded-2xl bg-slate-950/80 border border-slate-800 max-h-28 overflow-y-auto">
+            <label className="text-[11px] font-mono text-stone-600 block mb-1 font-semibold">Pick Avatar Glyph:</label>
+            <div className="flex flex-wrap gap-1.5 p-3 rounded-2xl bg-white border border-[#e5dcce] max-h-28 overflow-y-auto">
               {AVATAR_OPTIONS.map((opt) => (
                 <button
                   key={opt}
@@ -107,8 +110,8 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   onClick={() => setEmoji(opt)}
                   className={`w-9 h-9 rounded-xl text-xl flex items-center justify-center transition-all ${
                     emoji === opt
-                      ? 'bg-purple-600 text-white scale-110 shadow-md'
-                      : 'hover:bg-slate-800'
+                      ? 'bg-[#143d2b] text-white scale-110 shadow-xs'
+                      : 'hover:bg-[#faf7f2]'
                   }`}
                 >
                   {opt}
@@ -120,42 +123,42 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
           {/* Name & Archetype */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-[11px] font-mono text-slate-400 block mb-1">Name:</label>
+              <label className="text-[11px] font-mono text-stone-600 block mb-1 font-semibold">Name:</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Cyber Pegasus"
-                className="w-full bg-slate-950 text-slate-100 rounded-xl px-3.5 py-2.5 border border-slate-800 focus:border-purple-500"
+                className="w-full bg-white text-stone-900 rounded-xl px-3.5 py-2.5 border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
                 required
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-mono text-slate-400 block mb-1">Archetype Tagline:</label>
+              <label className="text-[11px] font-mono text-stone-600 block mb-1 font-semibold">Archetype Tagline:</label>
               <input
                 type="text"
                 value={archetype}
                 onChange={(e) => setArchetype(e.target.value)}
-                placeholder="e.g. The Neon Dreamer"
-                className="w-full bg-slate-950 text-slate-100 rounded-xl px-3.5 py-2.5 border border-slate-800 focus:border-purple-500"
+                placeholder="e.g. The Vintage Polymath"
+                className="w-full bg-white text-stone-900 rounded-xl px-3.5 py-2.5 border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
               />
             </div>
           </div>
 
           {/* Category */}
           <div>
-            <label className="text-[11px] font-mono text-slate-400 block mb-1">Category:</label>
+            <label className="text-[11px] font-mono text-stone-600 block mb-1 font-semibold">Category:</label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
               {(['romantic', 'funny', 'intelligent', 'chaotic', 'social', 'calm', 'strange'] as PersonalityCategory[]).map((cat) => (
                 <button
                   key={cat}
                   type="button"
                   onClick={() => setCategory(cat)}
-                  className={`py-2 px-1 rounded-xl text-[11px] font-bold uppercase transition-all ${
+                  className={`py-2 px-1 rounded-xl text-[11px] font-medium uppercase transition-all ${
                     category === cat
-                      ? 'bg-purple-600 text-white shadow-sm'
-                      : 'bg-slate-950 text-slate-400 border border-slate-800'
+                      ? 'bg-[#143d2b] text-white shadow-xs font-semibold'
+                      : 'bg-white text-stone-600 border border-[#e5dcce] hover:bg-stone-50'
                   }`}
                 >
                   {cat}
@@ -166,50 +169,50 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
 
           {/* Bio & Greeting */}
           <div>
-            <label className="text-[11px] font-mono text-slate-400 block mb-1">Personality & Bio:</label>
+            <label className="text-[11px] font-mono text-stone-600 block mb-1 font-semibold">Personality & Bio:</label>
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              placeholder="Describe their quirky habits, red flags, and digital charms..."
+              placeholder="Describe their eccentric habits, emotional traits, and digital demeanor..."
               rows={2}
-              className="w-full bg-slate-950 text-slate-100 rounded-xl px-3.5 py-2 border border-slate-800 focus:border-purple-500"
+              className="w-full bg-white text-stone-900 rounded-xl px-3.5 py-2 border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-[11px] font-mono text-slate-400 block mb-1">Core Interests (comma-separated):</label>
+              <label className="text-[11px] font-mono text-stone-600 block mb-1 font-semibold">Core Interests (comma-separated):</label>
               <input
                 type="text"
                 value={interestsStr}
                 onChange={(e) => setInterestsStr(e.target.value)}
-                className="w-full bg-slate-950 text-slate-100 rounded-xl px-3 py-2 border border-slate-800 focus:border-purple-500"
+                className="w-full bg-white text-stone-900 rounded-xl px-3 py-2 border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-mono text-slate-400 block mb-1">Match Greeting Message:</label>
+              <label className="text-[11px] font-mono text-stone-600 block mb-1 font-semibold">Match Greeting Message:</label>
               <input
                 type="text"
                 value={greeting}
                 onChange={(e) => setGreeting(e.target.value)}
-                placeholder="What they say when you match..."
-                className="w-full bg-slate-950 text-slate-100 rounded-xl px-3 py-2 border border-slate-800 focus:border-purple-500"
+                placeholder="What they transmit upon pair bonding..."
+                className="w-full bg-white text-stone-900 rounded-xl px-3 py-2 border border-[#e5dcce] focus:outline-none focus:border-[#143d2b]"
               />
             </div>
           </div>
 
           {/* The 8 Required Trait Sliders */}
-          <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
-            <span className="font-bold text-white font-mono block">
+          <div className="p-4 rounded-2xl bg-white border border-[#e5dcce] space-y-3">
+            <span className="font-bold text-stone-900 font-mono block text-xs uppercase">
               TUNE 8 TRAIT SLIDERS
             </span>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
               <div>
-                <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                <div className="flex justify-between text-[11px] font-mono text-stone-700 mb-1">
                   <span>❤️ Romance</span>
-                  <span className="text-rose-400 font-bold">{romance}%</span>
+                  <span className="text-rose-700 font-bold">{romance}%</span>
                 </div>
                 <input
                   type="range"
@@ -217,14 +220,14 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   max="100"
                   value={romance}
                   onChange={(e) => setRomance(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-900 rounded cursor-pointer accent-rose-500"
+                  className="w-full h-1.5 bg-[#f0eae1] rounded cursor-pointer accent-rose-600"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                <div className="flex justify-between text-[11px] font-mono text-stone-700 mb-1">
                   <span>😂 Humor</span>
-                  <span className="text-amber-400 font-bold">{humor}%</span>
+                  <span className="text-amber-700 font-bold">{humor}%</span>
                 </div>
                 <input
                   type="range"
@@ -232,14 +235,14 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   max="100"
                   value={humor}
                   onChange={(e) => setHumor(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-900 rounded cursor-pointer accent-amber-500"
+                  className="w-full h-1.5 bg-[#f0eae1] rounded cursor-pointer accent-amber-600"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                <div className="flex justify-between text-[11px] font-mono text-stone-700 mb-1">
                   <span>💀 Chaos</span>
-                  <span className="text-purple-400 font-bold">{chaos}%</span>
+                  <span className="text-purple-700 font-bold">{chaos}%</span>
                 </div>
                 <input
                   type="range"
@@ -247,14 +250,14 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   max="100"
                   value={chaos}
                   onChange={(e) => setChaos(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-900 rounded cursor-pointer accent-purple-500"
+                  className="w-full h-1.5 bg-[#f0eae1] rounded cursor-pointer accent-purple-600"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                <div className="flex justify-between text-[11px] font-mono text-stone-700 mb-1">
                   <span>🧠 Intelligence</span>
-                  <span className="text-cyan-400 font-bold">{intelligence}%</span>
+                  <span className="text-emerald-700 font-bold">{intelligence}%</span>
                 </div>
                 <input
                   type="range"
@@ -262,14 +265,14 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   max="100"
                   value={intelligence}
                   onChange={(e) => setIntelligence(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-900 rounded cursor-pointer accent-cyan-400"
+                  className="w-full h-1.5 bg-[#f0eae1] rounded cursor-pointer accent-emerald-700"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                <div className="flex justify-between text-[11px] font-mono text-stone-700 mb-1">
                   <span>⚡ Energy</span>
-                  <span className="text-yellow-400 font-bold">{energy}%</span>
+                  <span className="text-sky-700 font-bold">{energy}%</span>
                 </div>
                 <input
                   type="range"
@@ -277,14 +280,14 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   max="100"
                   value={energy}
                   onChange={(e) => setEnergy(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-900 rounded cursor-pointer accent-yellow-400"
+                  className="w-full h-1.5 bg-[#f0eae1] rounded cursor-pointer accent-sky-600"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                <div className="flex justify-between text-[11px] font-mono text-stone-700 mb-1">
                   <span>🎉 Social</span>
-                  <span className="text-pink-400 font-bold">{social}%</span>
+                  <span className="text-pink-700 font-bold">{social}%</span>
                 </div>
                 <input
                   type="range"
@@ -292,14 +295,14 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   max="100"
                   value={social}
                   onChange={(e) => setSocial(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-900 rounded cursor-pointer accent-pink-500"
+                  className="w-full h-1.5 bg-[#f0eae1] rounded cursor-pointer accent-pink-600"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                <div className="flex justify-between text-[11px] font-mono text-stone-700 mb-1">
                   <span>😌 Calmness</span>
-                  <span className="text-emerald-400 font-bold">{calmness}%</span>
+                  <span className="text-teal-700 font-bold">{calmness}%</span>
                 </div>
                 <input
                   type="range"
@@ -307,14 +310,14 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   max="100"
                   value={calmness}
                   onChange={(e) => setCalmness(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-900 rounded cursor-pointer accent-emerald-500"
+                  className="w-full h-1.5 bg-[#f0eae1] rounded cursor-pointer accent-teal-600"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                <div className="flex justify-between text-[11px] font-mono text-stone-700 mb-1">
                   <span>🔥 Confidence</span>
-                  <span className="text-rose-400 font-bold">{confidence}%</span>
+                  <span className="text-orange-700 font-bold">{confidence}%</span>
                 </div>
                 <input
                   type="range"
@@ -322,7 +325,7 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
                   max="100"
                   value={confidence}
                   onChange={(e) => setConfidence(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-900 rounded cursor-pointer accent-rose-500"
+                  className="w-full h-1.5 bg-[#f0eae1] rounded cursor-pointer accent-orange-600"
                 />
               </div>
             </div>
@@ -333,16 +336,16 @@ export const CustomCreatorModal: React.FC<CustomCreatorModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700"
+              className="px-5 py-2.5 rounded-full bg-white text-stone-600 border border-[#e5dcce] text-xs font-semibold hover:bg-stone-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-extrabold shadow-lg shadow-purple-500/25 flex items-center space-x-1.5"
+              className="px-6 py-2.5 rounded-full bg-[#143d2b] hover:bg-[#0f2e20] text-white text-xs font-semibold shadow-xs flex items-center space-x-1.5"
             >
               <Check className="w-4 h-4" />
-              <span>Save & Add to Dating Pool</span>
+              <span>Forge & Seed to Pool</span>
             </button>
           </div>
 

@@ -37,7 +37,7 @@ export const SwipeDeck: React.FC<SwipeDeckProps> = ({
     setLastSwipeToast({
       type: 'reject',
       emoji: currentProfile.emoji,
-      message: '❌ REJECTED — Your emojis were not emotionally compatible.'
+      message: '❌ DISMISSED — Non-viable emotional resonance detected.'
     });
     setTimeout(() => setLastSwipeToast(null), 3000);
     onReject(currentProfile);
@@ -50,7 +50,7 @@ export const SwipeDeck: React.FC<SwipeDeckProps> = ({
     setLastSwipeToast({
       type: 'accept',
       emoji: currentProfile.emoji,
-      message: '❤️ ACCEPTED — An emoji connection has been initiated.'
+      message: '❤️ INITIATED — Quantum romantic handshake dispatched.'
     });
     setTimeout(() => setLastSwipeToast(null), 3000);
     onAccept(currentProfile);
@@ -69,91 +69,95 @@ export const SwipeDeck: React.FC<SwipeDeckProps> = ({
     onSwipeRight: handleSwipeRight
   });
 
-  // Empty state when all 25+ profiles have been swiped
+  // Empty state when all profiles have been swiped
   if (!currentProfile) {
     return (
-      <div className="w-full max-w-md mx-auto py-16 px-6 text-center glass-panel rounded-3xl border border-slate-800 space-y-6 animate-in fade-in zoom-in-95 duration-200">
-        <div className="w-24 h-24 mx-auto rounded-3xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-6xl animate-bounce">
-          🎉
+      <div className="w-full max-w-lg mx-auto py-16 px-6 text-center bg-white rounded-3xl border-2 border-stone-200/90 shadow-xl space-y-6 my-8 animate-in fade-in zoom-in-95 duration-200">
+        <div className="w-24 h-24 mx-auto rounded-full bg-pink-100 border border-pink-200 flex items-center justify-center text-6xl shadow-sm">
+          🏆
         </div>
 
         <div className="space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            YOU HAVE JUDGED EVERY EMOJI.
+          <div className="text-xs font-mono text-stone-400 uppercase tracking-widest">
+            // POOL EXHAUSTED
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-stone-900 tracking-tight">
+            You Have Judged Every Emoji.
           </h2>
-          <p className="text-sm text-slate-400">
-            You may now reconsider your decisions or inspect your matches.
+          <p className="text-sm text-stone-600 font-serif italic max-w-md mx-auto">
+            The algorithm rests satisfied that no unicode glyph has escaped your discerning romantic scrutiny.
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 text-xs text-slate-400 italic">
-          "The algorithm rests, satisfied that no unicode character escaped your discerning gaze."
+        <div className="p-4 rounded-2xl bg-[#faf7f2] border border-stone-200 text-xs font-mono text-stone-500">
+          STATUS: 100% SWIPE EQUILIBRIUM ACHIEVED
         </div>
 
         <button
           onClick={onResetDiscovery}
-          className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-extrabold text-sm tracking-wide shadow-lg shadow-pink-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
+          className="inline-flex items-center space-x-2 px-7 py-3.5 rounded-2xl bg-[#143d2b] text-white font-medium text-sm hover:bg-[#1b4332] shadow-md transition-all active:scale-95"
         >
           <RotateCcw className="w-4 h-4" />
-          <span>RESET DISCOVERY</span>
+          <span>RELOAD ROMANCE POOL</span>
         </button>
       </div>
     );
   }
 
   return (
-    <div className="relative w-full flex flex-col items-center justify-center py-2 sm:py-6">
+    <div className="relative w-full max-w-lg mx-auto px-4 py-6 flex flex-col items-center select-none">
       
-      {/* Toast Feedback for last swipe */}
-      <div className="h-9 mb-2 flex items-center justify-center">
-        {lastSwipeToast && (
-          <div className={`px-4 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-2 shadow-lg animate-in fade-in slide-in-from-top-2 duration-150 ${
-            lastSwipeToast.type === 'accept'
-              ? 'bg-emerald-950/90 text-emerald-300 border border-emerald-500/40 shadow-emerald-500/10'
-              : 'bg-rose-950/90 text-rose-300 border border-rose-500/40 shadow-rose-500/10'
-          }`}>
-            <span>{lastSwipeToast.emoji}</span>
-            <span>{lastSwipeToast.message}</span>
-          </div>
-        )}
+      {/* Editorial Header */}
+      <div className="w-full text-center mb-4">
+        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-stone-900">
+          Emoji <span className="italic font-normal text-stone-600">Dating</span>
+        </h2>
+        <p className="text-xs font-mono text-stone-400 mt-1">
+          REMAINING CANDIDATES: {availableProfiles.length}
+        </p>
       </div>
 
-      {/* Card Deck Container */}
-      <div className="relative w-full max-w-sm sm:max-w-md h-[580px] sm:h-[620px] flex items-center justify-center">
-        {/* Next Card underneath for physical deck illusion */}
-        {nextProfile && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <EmojiCard profile={nextProfile} userProfile={userProfile} isTopCard={false} />
-          </div>
-        )}
-
-        {/* Current Active Top Card */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <EmojiCard
-            profile={currentProfile}
-            userProfile={userProfile}
-            isTopCard={true}
-            offset={offset}
-            rotation={rotation}
-            swipeIntent={swipeIntent}
-            dragProps={dragProps}
-            isExiting={isExiting}
-          />
+      {/* Swipe Feedback Toast */}
+      {lastSwipeToast && (
+        <div className={`fixed top-24 z-50 px-4 py-2 rounded-2xl font-mono text-xs shadow-lg animate-in slide-in-from-top duration-200 border ${
+          lastSwipeToast.type === 'accept'
+            ? 'bg-[#143d2b] text-white border-[#143d2b]'
+            : 'bg-rose-50 text-rose-900 border-rose-200'
+        }`}>
+          {lastSwipeToast.message}
         </div>
+      )}
+
+      {/* The Swipe Cards Stack */}
+      <div className="relative w-full max-w-sm sm:max-w-md h-[590px] sm:h-[630px] flex items-center justify-center">
+        {nextProfile && (
+          <EmojiCard
+            key={nextProfile.id}
+            profile={nextProfile}
+            userProfile={userProfile}
+            isTopCard={false}
+          />
+        )}
+
+        <EmojiCard
+          key={currentProfile.id}
+          profile={currentProfile}
+          userProfile={userProfile}
+          isTopCard={true}
+          offset={offset}
+          rotation={rotation}
+          swipeIntent={swipeIntent}
+          dragProps={dragProps}
+          isExiting={isExiting}
+        />
       </div>
 
-      {/* Action Controls & Keyboard Hints */}
+      {/* Tactile Controls */}
       <SwipeControls
         onReject={() => triggerSwipe('left')}
         onAccept={() => triggerSwipe('right')}
         disabled={isExiting !== null}
       />
-
-      {/* Remaining counter badge */}
-      <div className="mt-3 text-[11px] font-mono text-slate-500 flex items-center space-x-1.5">
-        <Sparkles className="w-3 h-3 text-pink-500" />
-        <span>{availableProfiles.length} Emojis Remaining in Pool</span>
-      </div>
 
     </div>
   );

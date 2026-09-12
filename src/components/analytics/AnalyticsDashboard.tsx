@@ -9,10 +9,7 @@ import {
   Sparkles, 
   Compass, 
   Leaf, 
-  Clock, 
-  Heart, 
   Zap, 
-  Smile, 
   CheckCircle2 
 } from 'lucide-react';
 
@@ -32,108 +29,106 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ stats })
   const rejectRatio = 100 - acceptRatio;
 
   return (
-    <div className="max-w-6xl mx-auto py-6 px-4 space-y-8 animate-in fade-in duration-150">
+    <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 space-y-8 animate-in fade-in duration-150">
       
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      {/* Editorial Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#e5dcce]">
         <div>
-          <div className="flex items-center space-x-2">
-            <BarChart3 className="w-6 h-6 text-cyan-400" />
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-              EMOJINATION™ ANALYTICS
-            </h1>
-          </div>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Completely unnecessary telemetry and empirical observations of digital romance.
+          <h1 className="text-3xl sm:text-4xl font-serif font-bold text-stone-900 tracking-tight flex items-center gap-3">
+            <span>Emoji Analytics</span>
+            <BarChart3 className="w-7 h-7 text-[#143d2b] inline" />
+          </h1>
+          <p className="text-xs sm:text-sm text-stone-600 mt-1 max-w-xl">
+            Empirical observations of synthetic intimacy, relational tensors, and fictional carbon dissipation.
           </p>
         </div>
 
-        <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span>Real-time Neural Stream</span>
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-[#e5dcce] text-stone-700 text-xs font-mono shadow-xs self-start sm:self-auto">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>Real-time Synapse Feed</span>
         </div>
       </div>
 
       {/* Top 8 Overengineered KPIs */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
         
-        <div className="p-4 rounded-3xl glass-panel border border-slate-800 space-y-1">
-          <span className="text-[11px] font-mono uppercase text-slate-400 block">Messages Sent</span>
-          <div className="text-2xl sm:text-3xl font-black text-white">
+        <div className="p-5 rounded-3xl bg-white border border-[#e5dcce] space-y-1 shadow-xs">
+          <span className="text-[11px] font-mono uppercase text-stone-500 block">Packets Sent</span>
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-stone-900">
             {stats.messagesSent.toLocaleString()}
           </div>
-          <span className="text-[10px] text-emerald-400 font-semibold flex items-center space-x-1">
+          <span className="text-[10px] text-emerald-700 font-semibold flex items-center space-x-1">
             <TrendingUp className="w-3 h-3" />
-            <span>+14% vs baseline human speech</span>
+            <span>+14% vs baseline prose</span>
           </span>
         </div>
 
-        <div className="p-4 rounded-3xl glass-panel border border-slate-800 space-y-1">
-          <span className="text-[11px] font-mono uppercase text-slate-400 block">Emojis Generated</span>
-          <div className="text-2xl sm:text-3xl font-black text-pink-400">
+        <div className="p-5 rounded-3xl bg-white border border-[#e5dcce] space-y-1 shadow-xs">
+          <span className="text-[11px] font-mono uppercase text-stone-500 block">Emojis Generated</span>
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-rose-700">
             {stats.emojisSent.toLocaleString()}
           </div>
-          <span className="text-[10px] text-pink-300 font-semibold">
+          <span className="text-[10px] text-rose-600 font-semibold">
             ✨ {stats.emojiDensity}% Unicode Density
           </span>
         </div>
 
-        <div className="p-4 rounded-3xl glass-panel border border-slate-800 space-y-1">
-          <span className="text-[11px] font-mono uppercase text-slate-400 block">Matches Formed</span>
-          <div className="text-2xl sm:text-3xl font-black text-cyan-400">
+        <div className="p-5 rounded-3xl bg-white border border-[#e5dcce] space-y-1 shadow-xs">
+          <span className="text-[11px] font-mono uppercase text-stone-500 block">Matches Formed</span>
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-[#143d2b]">
             {stats.matchesFormed}
           </div>
-          <span className="text-[10px] text-cyan-300 font-semibold">
-            💕 {stats.avgCompatibility}% Avg Compatibility
+          <span className="text-[10px] text-[#143d2b] font-semibold">
+            💕 {stats.avgCompatibility}% Avg Affinity
           </span>
         </div>
 
-        <div className="p-4 rounded-3xl glass-panel border border-slate-800 space-y-1">
-          <span className="text-[11px] font-mono uppercase text-slate-400 block">Profiles Rejected</span>
-          <div className="text-2xl sm:text-3xl font-black text-rose-400">
+        <div className="p-5 rounded-3xl bg-white border border-[#e5dcce] space-y-1 shadow-xs">
+          <span className="text-[11px] font-mono uppercase text-stone-500 block">Profiles Rejected</span>
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-stone-700">
             {stats.profilesRejected}
           </div>
-          <span className="text-[10px] text-rose-300 font-semibold">
+          <span className="text-[10px] text-stone-500 font-semibold">
             ❌ {rejectRatio}% Rejection Rate
           </span>
         </div>
 
-        <div className="p-4 rounded-3xl glass-panel border border-slate-800 space-y-1">
-          <span className="text-[11px] font-mono uppercase text-slate-400 block">Average Chaos Index</span>
-          <div className="text-2xl sm:text-3xl font-black text-purple-400">
+        <div className="p-5 rounded-3xl bg-white border border-[#e5dcce] space-y-1 shadow-xs">
+          <span className="text-[11px] font-mono uppercase text-stone-500 block">Mean Chaos Index</span>
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-purple-800">
             {stats.avgChaos}%
           </div>
-          <span className="text-[10px] text-purple-300 font-semibold">
-            🔥 High Entropy Turbulence
+          <span className="text-[10px] text-purple-700 font-semibold">
+            ⚡ High Entropy Turbulence
           </span>
         </div>
 
-        <div className="p-4 rounded-3xl glass-panel border border-slate-800 space-y-1">
-          <span className="text-[11px] font-mono uppercase text-slate-400 block">Romance Probability</span>
-          <div className="text-2xl sm:text-3xl font-black text-rose-300">
+        <div className="p-5 rounded-3xl bg-white border border-[#e5dcce] space-y-1 shadow-xs">
+          <span className="text-[11px] font-mono uppercase text-stone-500 block">Romance Probability</span>
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-rose-800">
             {Math.min(99, stats.avgCompatibility - 6)}%
           </div>
-          <span className="text-[10px] text-rose-400 font-semibold">
+          <span className="text-[10px] text-rose-700 font-semibold">
             🌷 88% Butterfly Frequency
           </span>
         </div>
 
-        <div className="p-4 rounded-3xl glass-panel border border-slate-800 space-y-1">
-          <span className="text-[11px] font-mono uppercase text-slate-400 block">Avg Reply Latency</span>
-          <div className="text-2xl sm:text-3xl font-black text-amber-400">
+        <div className="p-5 rounded-3xl bg-white border border-[#e5dcce] space-y-1 shadow-xs">
+          <span className="text-[11px] font-mono uppercase text-stone-500 block">Reply Latency</span>
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-800">
             {stats.replyTimeSec}s
           </div>
-          <span className="text-[10px] text-amber-300 font-semibold">
+          <span className="text-[10px] text-amber-700 font-semibold">
             ⚡ Algorithmic Response Time
           </span>
         </div>
 
-        <div className="p-4 rounded-3xl glass-panel border border-slate-800 space-y-1">
-          <span className="text-[11px] font-mono uppercase text-slate-400 block">Acceptance Ratio</span>
-          <div className="text-2xl sm:text-3xl font-black text-emerald-400">
+        <div className="p-5 rounded-3xl bg-white border border-[#e5dcce] space-y-1 shadow-xs">
+          <span className="text-[11px] font-mono uppercase text-stone-500 block">Acceptance Ratio</span>
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-emerald-800">
             {acceptRatio}%
           </div>
-          <span className="text-[10px] text-emerald-300 font-semibold">
+          <span className="text-[10px] text-emerald-700 font-semibold">
             ❤️ Right Swipes
           </span>
         </div>
@@ -144,66 +139,66 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ stats })
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         {/* Swipe Dynamics Visualizer */}
-        <div className="p-6 rounded-3xl glass-panel border border-slate-800 space-y-4">
+        <div className="p-6 rounded-3xl bg-white border border-[#e5dcce] space-y-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-extrabold text-white flex items-center space-x-2">
-              <Flame className="w-4 h-4 text-pink-500" />
-              <span>SWIPE EQUILIBRIUM (ACCEPT VS REJECT)</span>
+            <h3 className="text-base font-serif font-bold text-stone-900 flex items-center space-x-2">
+              <Flame className="w-4 h-4 text-rose-600" />
+              <span>Swipe Equilibrium (Accept vs Reject)</span>
             </h3>
-            <span className="text-xs font-mono text-slate-400">{totalSwipes} Total Swipes</span>
+            <span className="text-xs font-mono text-stone-500">{totalSwipes} Total Swipes</span>
           </div>
 
           {/* Comparative Bar */}
-          <div className="w-full h-8 rounded-2xl bg-slate-950 flex overflow-hidden p-1 border border-slate-800">
+          <div className="w-full h-8 rounded-2xl bg-[#f0eae1] flex overflow-hidden p-1">
             <div
-              className="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-xl flex items-center justify-center text-xs font-black text-slate-950 transition-all duration-500"
+              className="bg-[#143d2b] h-full rounded-xl flex items-center justify-center text-xs font-bold text-white transition-all duration-500"
               style={{ width: `${acceptRatio}%` }}
             >
               {acceptRatio > 15 && `❤️ ${acceptRatio}%`}
             </div>
             <div
-              className="bg-gradient-to-r from-rose-500 to-pink-600 h-full rounded-xl flex items-center justify-center text-xs font-black text-white transition-all duration-500"
+              className="bg-rose-600 h-full rounded-xl flex items-center justify-center text-xs font-bold text-white transition-all duration-500"
               style={{ width: `${rejectRatio}%` }}
             >
               {rejectRatio > 15 && `❌ ${rejectRatio}%`}
             </div>
           </div>
 
-          <div className="flex justify-between text-xs text-slate-400 font-mono">
+          <div className="flex justify-between text-xs text-stone-600 font-mono">
             <div className="flex items-center space-x-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#143d2b]" />
               <span>Accepted ({stats.profilesAccepted})</span>
             </div>
             <div className="flex items-center space-x-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-600" />
               <span>Rejected ({stats.profilesRejected})</span>
             </div>
           </div>
         </div>
 
         {/* Emoji Category Distribution Spectrum */}
-        <div className="p-6 rounded-3xl glass-panel border border-slate-800 space-y-4">
+        <div className="p-6 rounded-3xl bg-white border border-[#e5dcce] space-y-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-extrabold text-white flex items-center space-x-2">
-              <Zap className="w-4 h-4 text-cyan-400" />
-              <span>EMOJI CATEGORY VOLUMES</span>
+            <h3 className="text-base font-serif font-bold text-stone-900 flex items-center space-x-2">
+              <Zap className="w-4 h-4 text-[#143d2b]" />
+              <span>Emoji Semantic Volumes</span>
             </h3>
-            <span className="text-xs font-mono text-slate-400">Unicode 15.0</span>
+            <span className="text-xs font-mono text-stone-500">Unicode 15.0</span>
           </div>
 
-          <div className="space-y-2 text-xs">
+          <div className="space-y-2.5 text-xs">
             {[
-              { cat: 'Tech & Gaming (💻 🎮)', pct: 88, color: 'bg-cyan-400' },
-              { cat: 'Chaos & Fire (🔥 😈)', pct: 76, color: 'bg-pink-500' },
-              { cat: 'Romance & Hearts (❤️ 🥰)', pct: 92, color: 'bg-rose-400' },
-              { cat: 'Caffeine & Food (☕ 🍕)', pct: 64, color: 'bg-amber-400' },
+              { cat: 'Tech & Gaming (💻 🎮)', pct: 88, color: 'bg-[#143d2b]' },
+              { cat: 'Chaos & Fire (🔥 😈)', pct: 76, color: 'bg-orange-600' },
+              { cat: 'Romance & Hearts (❤️ 🥰)', pct: 92, color: 'bg-rose-600' },
+              { cat: 'Caffeine & Food (☕ 🍕)', pct: 64, color: 'bg-amber-600' },
             ].map((item) => (
               <div key={item.cat} className="space-y-1">
-                <div className="flex justify-between text-slate-300 text-[11px]">
-                  <span>{item.cat}</span>
-                  <span className="font-mono text-slate-200">{item.pct}%</span>
+                <div className="flex justify-between text-stone-700 text-[11px]">
+                  <span className="font-medium">{item.cat}</span>
+                  <span className="font-mono text-stone-900 font-bold">{item.pct}%</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div className="w-full h-2 rounded-full bg-[#f0eae1] overflow-hidden">
                   <div className={`h-full rounded-full ${item.color}`} style={{ width: `${item.pct}%` }} />
                 </div>
               </div>
@@ -214,23 +209,23 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ stats })
       </div>
 
       {/* ABSURD FEATURE 1: EMOTIONAL WEATHER */}
-      <div className="p-6 rounded-3xl glass-panel-glow border border-pink-500/30 bg-slate-900/90 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5dcce] space-y-4 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#e5dcce]">
           <div className="flex items-center space-x-2">
-            <CloudSun className="w-5 h-5 text-amber-400" />
-            <h3 className="text-sm sm:text-base font-black text-white">
-              EMOTIONAL WEATHER REPORT
+            <CloudSun className="w-5 h-5 text-amber-600" />
+            <h3 className="text-lg font-serif font-bold text-stone-900">
+              Atmospheric Emotional Forecast
             </h3>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-1 overflow-x-auto pb-1">
             {EMOTIONAL_WEATHER_CONDITIONS.map((cond, i) => (
               <button
                 key={i}
                 onClick={() => setActiveWeatherIdx(i)}
-                className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-all ${
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
                   activeWeatherIdx === i
-                    ? 'bg-pink-500 text-white shadow-sm'
-                    : 'bg-slate-800 text-slate-400 hover:text-white'
+                    ? 'bg-[#143d2b] text-white font-semibold shadow-xs'
+                    : 'bg-[#faf7f2] text-stone-600 hover:bg-white border border-[#e5dcce]'
                 }`}
               >
                 {cond.condition.split(' ')[0]}
@@ -239,49 +234,49 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ stats })
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
-          <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-center space-y-1">
-            <span className="text-3xl block">{currentWeather.condition.split(' ')[0]}</span>
-            <h4 className="text-lg font-black text-white">{currentWeather.condition}</h4>
-            <p className="text-xs font-mono text-pink-400">Temperature: {currentWeather.temp}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center pt-2">
+          <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5dcce] text-center space-y-1">
+            <span className="text-4xl block mb-1">{currentWeather.condition.split(' ')[0]}</span>
+            <h4 className="text-lg font-serif font-bold text-stone-900">{currentWeather.condition}</h4>
+            <p className="text-xs font-mono text-[#143d2b] font-semibold">Temperature: {currentWeather.temp}</p>
           </div>
 
           <div className="sm:col-span-2 space-y-2 text-xs">
-            <p className="text-slate-300 italic mb-3">
+            <p className="text-stone-700 italic mb-3 font-serif text-sm">
               "{currentWeather.description}"
             </p>
             <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
-              <div className="p-2 rounded-xl bg-slate-950/60 border border-slate-800 flex justify-between">
-                <span className="text-slate-400">Romance:</span>
-                <span className="text-rose-400 font-bold">{currentWeather.romance}%</span>
+              <div className="p-2.5 rounded-xl bg-[#faf7f2] border border-[#e5dcce] flex justify-between">
+                <span className="text-stone-500">Romance:</span>
+                <span className="text-rose-700 font-bold">{currentWeather.romance}%</span>
               </div>
-              <div className="p-2 rounded-xl bg-slate-950/60 border border-slate-800 flex justify-between">
-                <span className="text-slate-400">Chaos Index:</span>
-                <span className="text-purple-400 font-bold">{currentWeather.chaos}%</span>
+              <div className="p-2.5 rounded-xl bg-[#faf7f2] border border-[#e5dcce] flex justify-between">
+                <span className="text-stone-500">Chaos Index:</span>
+                <span className="text-purple-700 font-bold">{currentWeather.chaos}%</span>
               </div>
-              <div className="p-2 rounded-xl bg-slate-950/60 border border-slate-800 flex justify-between">
-                <span className="text-slate-400">Probability of 😂:</span>
-                <span className="text-amber-400 font-bold">{currentWeather.laughProbability}%</span>
+              <div className="p-2.5 rounded-xl bg-[#faf7f2] border border-[#e5dcce] flex justify-between">
+                <span className="text-stone-500">Probability of 😂:</span>
+                <span className="text-amber-700 font-bold">{currentWeather.laughProbability}%</span>
               </div>
-              <div className="p-2 rounded-xl bg-slate-950/60 border border-slate-800 flex justify-between">
-                <span className="text-slate-400">Sadness:</span>
-                <span className="text-cyan-400 font-bold">{currentWeather.sadness}%</span>
+              <div className="p-2.5 rounded-xl bg-[#faf7f2] border border-[#e5dcce] flex justify-between">
+                <span className="text-stone-500">Sadness:</span>
+                <span className="text-sky-700 font-bold">{currentWeather.sadness}%</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ABSURD FEATURE 2: EMOJI HOROSCOPE & ABSURD FEATURE 3: CARBON FOOTPRINT */}
+      {/* ABSURD FEATURE 2 & 3: HOROSCOPE & CARBON FOOTPRINT */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         {/* Emoji Horoscope */}
-        <div className="p-6 rounded-3xl glass-panel border border-slate-800 space-y-4">
+        <div className="p-6 rounded-3xl bg-white border border-[#e5dcce] space-y-4 shadow-xs">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Compass className="w-5 h-5 text-purple-400" />
-              <h3 className="text-sm font-extrabold text-white">
-                DAILY EMOJI HOROSCOPE
+              <Compass className="w-5 h-5 text-purple-700" />
+              <h3 className="text-base font-serif font-bold text-stone-900">
+                Daily Emoji Astrological Forecast
               </h3>
             </div>
             <div className="flex items-center space-x-1">
@@ -290,7 +285,7 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ stats })
                   key={idx}
                   onClick={() => setActiveHoroscopeIdx(idx)}
                   className={`w-7 h-7 rounded-lg text-sm flex items-center justify-center transition-all ${
-                    activeHoroscopeIdx === idx ? 'bg-purple-600 text-white scale-110' : 'bg-slate-800 opacity-60 hover:opacity-100'
+                    activeHoroscopeIdx === idx ? 'bg-[#143d2b] text-white scale-110 shadow-xs' : 'hover:bg-[#faf7f2] text-stone-600'
                   }`}
                 >
                   {h.emoji}
@@ -299,61 +294,61 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ stats })
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
+          <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5dcce] space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-purple-300">
+              <span className="text-xs font-serif font-bold text-stone-900">
                 {currentHoroscope.sign}
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">
+              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800">
                 Chaos: {currentHoroscope.chaosIndex}%
               </span>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed italic">
+            <p className="text-xs text-stone-700 leading-relaxed italic font-serif">
               "{currentHoroscope.prediction}"
             </p>
 
-            <div className="flex items-center space-x-4 text-[11px] pt-2 border-t border-slate-800 font-mono">
-              <span className="text-slate-400">
-                Lucky: <span className="text-lg">{currentHoroscope.luckyEmoji}</span>
+            <div className="flex items-center space-x-4 text-[11px] pt-2 border-t border-[#e5dcce] font-mono">
+              <span className="text-stone-600">
+                Harmonic: <span className="text-lg">{currentHoroscope.luckyEmoji}</span>
               </span>
-              <span className="text-slate-400">
-                Avoid: <span className="text-lg">{currentHoroscope.dangerEmoji}</span>
+              <span className="text-stone-600">
+                Avert: <span className="text-lg">{currentHoroscope.dangerEmoji}</span>
               </span>
             </div>
           </div>
         </div>
 
         {/* Emoji Carbon Footprint */}
-        <div className="p-6 rounded-3xl glass-panel border border-slate-800 space-y-4">
+        <div className="p-6 rounded-3xl bg-white border border-[#e5dcce] space-y-4 shadow-xs">
           <div className="flex items-center space-x-2">
-            <Leaf className="w-5 h-5 text-emerald-400" />
-            <h3 className="text-sm font-extrabold text-white">
-              EMOJI CARBON FOOTPRINT
+            <Leaf className="w-5 h-5 text-emerald-700" />
+            <h3 className="text-base font-serif font-bold text-stone-900">
+              Unicode Carbon Offset Ledger
             </h3>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
+          <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5dcce] space-y-3">
             <div className="flex items-center space-x-3">
               <div className="text-3xl">🌱</div>
               <div>
-                <span className="text-xs text-slate-400 block font-mono">
+                <span className="text-xs text-stone-500 block font-mono">
                   {stats.emojisSent.toLocaleString()} Emojis Rendered
                 </span>
-                <span className="text-lg sm:text-xl font-black text-emerald-400 font-mono">
+                <span className="text-xl font-serif font-bold text-emerald-800 font-mono">
                   {stats.carbonFootprintKg} kg
                 </span>
               </div>
             </div>
 
-            <p className="text-xs text-slate-400 leading-relaxed italic">
+            <p className="text-xs text-stone-600 leading-relaxed italic">
               Estimated fictional environmental impact: 0.00000042 imaginary kilograms of emoji emissions.
               100% carbon-neutral absurdity guaranteed by our quantum trees.
             </p>
 
-            <div className="flex items-center space-x-2 pt-2 border-t border-slate-800 text-[10px] text-emerald-400 font-mono">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Certified Green Unicode Computing</span>
+            <div className="flex items-center space-x-2 pt-2 border-t border-[#e5dcce] text-[10px] text-emerald-800 font-mono">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Certified Green Unicode Computing Protocol</span>
             </div>
           </div>
         </div>

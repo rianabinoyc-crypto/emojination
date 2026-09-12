@@ -1,7 +1,6 @@
-﻿import React, { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SoftAtmosphere } from './SoftAtmosphere';
 import { HeroLivingEmoji } from './HeroLivingEmoji';
-import { TripartiteEcosystemSection } from './TripartiteEcosystemSection';
 import { LanguageMorphSection } from './LanguageMorphSection';
 import { VisualDictionarySection } from './VisualDictionarySection';
 import { EcosystemAtlasSection } from './EcosystemAtlasSection';
@@ -18,7 +17,6 @@ interface LandingPageProps {
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
-  const pillarsSectionRef = useRef<HTMLDivElement>(null);
   const languageSectionRef = useRef<HTMLDivElement>(null);
   const dictionarySectionRef = useRef<HTMLDivElement>(null);
   const ecosystemSectionRef = useRef<HTMLDivElement>(null);
@@ -36,7 +34,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="relative min-h-screen w-full bg-[#fdfbf7] text-stone-800 font-['Plus_Jakarta_Sans',sans-serif] selection:bg-amber-200 selection:text-stone-900 overflow-x-hidden">
       
-      {/* 1. Light Atmospheric Color Foundation (Ivory, peach, lavender, soft coral diffuse light) */}
+      {/* 1. Light Atmospheric Color Foundation */}
       <SoftAtmosphere />
 
       {/* 2. Minimalist Floating Navigation */}
@@ -60,12 +58,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
           {/* Minimal Links */}
           <nav className="hidden md:flex items-center space-x-6 text-xs font-mono uppercase tracking-wider text-stone-500">
-            <button
-              onClick={() => scrollToSection(pillarsSectionRef)}
-              className="hover:text-stone-900 transition-colors"
-            >
-              Pillars
-            </button>
             <button
               onClick={() => scrollToSection(languageSectionRef)}
               className="hover:text-stone-900 transition-colors"
@@ -99,32 +91,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         </div>
       </header>
 
-      {/* 3. Main Composition Stream (Continuous editorial canvas) */}
+      {/* 3. Main Composition Stream */}
       <main className="relative z-10 w-full">
         
         {/* Asymmetric Living Hero Section */}
         <HeroLivingEmoji
           onTranslateClick={() => scrollToSection(languageSectionRef)}
-          onExploreClick={() => scrollToSection(pillarsSectionRef)}
+          onExploreClick={() => scrollToSection(languageSectionRef)}
         />
-
-        {/* Section Divider Line with Annotation */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-8 my-4 flex items-center justify-between text-stone-300 text-[10px] font-mono">
-          <span>// ECOSYSTEM ARCHITECTURE & PILLAR SCHEMATIC</span>
-          <div className="flex-1 mx-4 border-b border-stone-200/70" />
-          <span>✦ 01</span>
-        </div>
-
-        {/* 3-Pillar Tripartite Architecture Section (CONNECT / EXPRESS / TRACK) */}
-        <div ref={pillarsSectionRef}>
-          <TripartiteEcosystemSection onNavigate={onNavigate} />
-        </div>
 
         {/* Section Divider Line with Annotation */}
         <div className="max-w-6xl mx-auto px-4 sm:px-8 my-4 flex items-center justify-between text-stone-300 text-[10px] font-mono">
           <span>// TRANSLATION PROTOCOL & MORPH ENGINE</span>
           <div className="flex-1 mx-4 border-b border-stone-200/70" />
-          <span>✦ 02</span>
+          <span>✦ 01</span>
         </div>
 
         {/* Interactive Transformation Engine Section */}
@@ -136,7 +116,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         <div className="max-w-6xl mx-auto px-4 sm:px-8 my-4 flex items-center justify-between text-stone-300 text-[10px] font-mono">
           <span>// PHONETIC LEXICON & EXPERIMENTAL DICTIONARY</span>
           <div className="flex-1 mx-4 border-b border-stone-200/70" />
-          <span>✦ 03</span>
+          <span>✦ 02</span>
         </div>
 
         {/* Experimental Visual Dictionary Section */}
@@ -148,7 +128,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         <div className="max-w-6xl mx-auto px-4 sm:px-8 my-4 flex items-center justify-between text-stone-300 text-[10px] font-mono">
           <span>// UNIVERSAL ECOSYSTEM ATLAS</span>
           <div className="flex-1 mx-4 border-b border-stone-200/70" />
-          <span>✦ 04</span>
+          <span>✦ 03</span>
         </div>
 
         {/* Departments of Expression (Ecosystem Atlas) */}
@@ -171,8 +151,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="flex flex-wrap items-center gap-6 font-mono text-[11px] text-stone-400">
-            <span>[UNICODE 16.0 COMPLIANT]</span>
-            <span>•</span>
             <span>WORDS → FEELINGS → EMOJI</span>
             <span>•</span>
             <button

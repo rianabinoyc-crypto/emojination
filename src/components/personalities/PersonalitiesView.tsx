@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { EmojiProfile, PersonalityCategory } from '../../types';
+import { EmojiProfile } from '../../types';
 import { CustomCreatorModal } from './CustomCreatorModal';
-import { Search, Plus, Sparkles, Check, Heart, Brain, Zap, Filter, Flame } from 'lucide-react';
+import { Search, Plus, Sparkles, Check, Brain, X } from 'lucide-react';
 
 interface PersonalitiesViewProps {
   allPersonalities: EmojiProfile[];
@@ -24,7 +24,7 @@ export const PersonalitiesView: React.FC<PersonalitiesViewProps> = ({
   const [selectedProfile, setSelectedProfile] = useState<EmojiProfile | null>(null);
 
   const categories: { id: string; label: string; icon: string }[] = [
-    { id: 'all', label: 'All Personalities', icon: '✨' },
+    { id: 'all', label: 'All Personas', icon: '✨' },
     { id: 'romantic', label: 'Romantic', icon: '❤️' },
     { id: 'funny', label: 'Funny', icon: '😂' },
     { id: 'intelligent', label: 'Intelligent', icon: '🧠' },
@@ -47,29 +47,27 @@ export const PersonalitiesView: React.FC<PersonalitiesViewProps> = ({
   });
 
   return (
-    <div className="max-w-6xl mx-auto py-6 px-4 space-y-6 animate-in fade-in duration-150">
+    <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 space-y-6 animate-in fade-in duration-150">
       
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      {/* Editorial Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#e5dcce]">
         <div>
-          <div className="flex items-center space-x-2.5">
-            <Brain className="w-7 h-7 text-purple-400" />
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-              EMOJI PERSONALITY LAB
-            </h1>
-          </div>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Browse 50+ unique unicode personalities, toggle them in your dating pool, or forge your own.
+          <h1 className="text-3xl sm:text-4xl font-serif font-bold text-stone-900 tracking-tight flex items-center gap-3">
+            <span>Emoji Personalities</span>
+            <Brain className="w-7 h-7 text-[#143d2b] inline" />
+          </h1>
+          <p className="text-xs sm:text-sm text-stone-600 mt-1 max-w-xl">
+            Inspect 50+ multidimensional synthetic archetypes, modulate their presence in your active dating pool, or synthesize entirely bespoke entities.
           </p>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 self-start sm:self-auto">
           <button
             onClick={() => setShowCreatorModal(true)}
-            className="flex items-center space-x-1.5 px-4 py-2 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-extrabold text-xs shadow-lg shadow-purple-500/25 hover:scale-105 active:scale-95 transition-all"
+            className="flex items-center space-x-2 px-5 py-2.5 rounded-full bg-[#143d2b] hover:bg-[#0f2e20] text-white font-semibold text-xs transition-all shadow-xs"
           >
             <Plus className="w-4 h-4" />
-            <span>CREATE CUSTOM PERSONALITY</span>
+            <span>Forge New Persona</span>
           </button>
         </div>
       </div>
@@ -77,13 +75,13 @@ export const PersonalitiesView: React.FC<PersonalitiesViewProps> = ({
       {/* Search & Category Filter Bar */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search 50+ emoji personalities by name, archetype, or emoji..."
-            className="w-full bg-slate-900 text-slate-200 placeholder-slate-500 rounded-2xl pl-10 pr-4 py-3 text-xs border border-slate-800 focus:outline-none focus:border-purple-500/50"
+            placeholder="Search personas by archetype, name, or emoji glyph..."
+            className="w-full bg-white text-stone-900 placeholder-stone-400 rounded-2xl pl-10 pr-4 py-3 text-xs border border-[#e5dcce] focus:outline-none focus:border-[#143d2b] focus:ring-1 focus:ring-[#143d2b] shadow-xs"
           />
         </div>
 
@@ -93,10 +91,10 @@ export const PersonalitiesView: React.FC<PersonalitiesViewProps> = ({
             <button
               key={c.id}
               onClick={() => setSelectedCategory(c.id)}
-              className={`flex items-center space-x-1 px-3 py-2 rounded-xl font-bold whitespace-nowrap transition-all ${
+              className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-full font-medium whitespace-nowrap transition-all ${
                 selectedCategory === c.id
-                  ? 'bg-purple-600 text-white shadow-sm'
-                  : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                  ? 'bg-[#143d2b] text-white shadow-xs font-semibold'
+                  : 'bg-white text-stone-600 hover:bg-[#faf7f2] border border-[#e5dcce]'
               }`}
             >
               <span>{c.icon}</span>
@@ -114,78 +112,78 @@ export const PersonalitiesView: React.FC<PersonalitiesViewProps> = ({
           return (
             <div
               key={profile.id}
-              className="p-5 rounded-3xl glass-panel border border-slate-800 hover:border-purple-500/40 transition-all flex flex-col justify-between group"
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#e5dcce] hover:border-[#143d2b]/40 hover:shadow-md transition-all flex flex-col justify-between group shadow-xs"
             >
               <div>
                 {/* Top bar with Category pill & custom tag */}
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-slate-800 text-purple-300 font-bold border border-slate-700">
+                  <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-[#faf7f2] text-stone-700 font-semibold border border-[#e5dcce]">
                     {profile.category}
                   </span>
 
                   {profile.isCustom && (
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/40">
-                      Custom Created
+                    <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                      Bespoke Entity
                     </span>
                   )}
                 </div>
 
                 {/* Avatar and Main text */}
                 <div className="flex items-start space-x-3.5">
-                  <div className="w-14 h-14 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-[#faf7f2] border border-[#e5dcce] flex items-center justify-center text-3xl shadow-xs group-hover:scale-105 transition-transform">
                     {profile.emoji}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-extrabold text-white truncate">
+                    <h3 className="text-base font-serif font-bold text-stone-900 truncate">
                       {profile.name}
                     </h3>
-                    <p className="text-xs text-purple-400 font-medium truncate">
+                    <p className="text-xs text-[#143d2b] font-medium truncate font-sans">
                       {profile.archetype}
                     </p>
-                    <p className="text-[11px] text-slate-400 line-clamp-2 mt-1">
+                    <p className="text-[11px] text-stone-600 line-clamp-2 mt-1">
                       {profile.personality}
                     </p>
                   </div>
                 </div>
 
                 {/* Stats row */}
-                <div className="grid grid-cols-3 gap-1.5 mt-4 p-2 rounded-2xl bg-slate-950/70 border border-slate-800/80 text-[10px] font-mono text-center">
+                <div className="grid grid-cols-3 gap-1.5 mt-4 p-2.5 rounded-2xl bg-[#faf7f2] border border-[#ece4d8] text-[10px] font-mono text-center">
                   <div>
-                    <span className="text-slate-500 block">Romance</span>
-                    <span className="text-rose-400 font-bold">{profile.romance}%</span>
+                    <span className="text-stone-500 block">Romance</span>
+                    <span className="text-rose-700 font-bold">{profile.romance}%</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block">Humor</span>
-                    <span className="text-amber-400 font-bold">{profile.humor}%</span>
+                    <span className="text-stone-500 block">Humor</span>
+                    <span className="text-amber-700 font-bold">{profile.humor}%</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block">Chaos</span>
-                    <span className="text-purple-400 font-bold">{profile.chaos}%</span>
+                    <span className="text-stone-500 block">Chaos</span>
+                    <span className="text-purple-700 font-bold">{profile.chaos}%</span>
                   </div>
                 </div>
               </div>
 
               {/* Bottom Action: Toggle in Dating Pool */}
-              <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
+              <div className="mt-5 pt-3 border-t border-[#f0eae1] flex items-center justify-between">
                 <button
                   onClick={() => setSelectedProfile(profile)}
-                  className="text-xs text-slate-400 hover:text-white font-medium"
+                  className="text-xs text-stone-600 hover:text-stone-900 font-medium underline-offset-2 hover:underline"
                 >
-                  View Details
+                  View Dossier
                 </button>
 
                 <button
                   onClick={() => onToggleDatingPool(profile.id)}
-                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+                  className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all border ${
                     inPool
-                      ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-rose-500/20 hover:text-rose-300 hover:border-rose-500/40'
-                      : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-purple-600 hover:text-white hover:border-purple-500'
+                      ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-rose-50 hover:text-rose-800 hover:border-rose-300'
+                      : 'bg-white text-stone-700 border-[#e5dcce] hover:bg-[#143d2b] hover:text-white hover:border-[#143d2b]'
                   }`}
                 >
                   {inPool ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>In Dating Pool</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>In Pool</span>
                     </>
                   ) : (
                     <>
@@ -203,66 +201,66 @@ export const PersonalitiesView: React.FC<PersonalitiesViewProps> = ({
 
       {/* Detail Dossier Modal */}
       {selectedProfile && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="relative w-full max-w-lg rounded-3xl p-6 sm:p-8 glass-panel-glow bg-slate-900 border border-purple-500/40 shadow-2xl text-slate-200 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-sm animate-in fade-in duration-150">
+          <div className="relative w-full max-w-lg rounded-3xl p-6 sm:p-8 bg-[#fdfbf7] border-2 border-[#143d2b] shadow-2xl text-stone-900 space-y-4">
             <button
               onClick={() => setSelectedProfile(null)}
-              className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-xl bg-slate-800/80"
+              className="absolute top-5 right-5 text-stone-500 hover:text-stone-900 p-1.5 rounded-full bg-white border border-[#e5dcce]"
             >
-              ✕
+              <X className="w-4 h-4" />
             </button>
 
             <div className="flex items-center space-x-4">
-              <div className="w-20 h-20 rounded-3xl bg-slate-800 border border-slate-700 flex items-center justify-center text-5xl">
+              <div className="w-20 h-20 rounded-3xl bg-[#faf7f2] border border-[#e5dcce] flex items-center justify-center text-5xl shadow-xs">
                 {selectedProfile.emoji}
               </div>
               <div>
-                <h3 className="text-2xl font-black text-white">{selectedProfile.name}</h3>
-                <p className="text-sm text-purple-400 font-semibold">{selectedProfile.archetype}</p>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 uppercase">
+                <h3 className="text-2xl font-serif font-bold text-stone-900">{selectedProfile.name}</h3>
+                <p className="text-sm text-[#143d2b] font-semibold">{selectedProfile.archetype}</p>
+                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#143d2b]/10 text-[#143d2b] uppercase font-bold">
                   {selectedProfile.category}
                 </span>
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+            <p className="text-xs sm:text-sm text-stone-700 leading-relaxed italic bg-white p-3.5 rounded-2xl border border-[#e5dcce]">
               "{selectedProfile.bio}"
             </p>
 
             {/* Trait Matrix */}
-            <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2 text-xs font-mono">
-              <span className="text-slate-400 font-bold block">PERSONALITY SPECTRUM</span>
+            <div className="p-4 rounded-2xl bg-white border border-[#e5dcce] space-y-2 text-xs font-mono">
+              <span className="text-stone-500 font-bold block text-[11px] uppercase">Synaptic Trait Spectrum</span>
               <div className="grid grid-cols-2 gap-2">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Romance:</span>
-                  <span className="text-rose-400 font-bold">{selectedProfile.romance}%</span>
+                  <span className="text-stone-600">Romance:</span>
+                  <span className="text-rose-700 font-bold">{selectedProfile.romance}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Humor:</span>
-                  <span className="text-amber-400 font-bold">{selectedProfile.humor}%</span>
+                  <span className="text-stone-600">Humor:</span>
+                  <span className="text-amber-700 font-bold">{selectedProfile.humor}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Chaos:</span>
-                  <span className="text-purple-400 font-bold">{selectedProfile.chaos}%</span>
+                  <span className="text-stone-600">Chaos:</span>
+                  <span className="text-purple-700 font-bold">{selectedProfile.chaos}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Intelligence:</span>
-                  <span className="text-cyan-400 font-bold">{selectedProfile.intelligence}%</span>
+                  <span className="text-stone-600">Intelligence:</span>
+                  <span className="text-emerald-700 font-bold">{selectedProfile.intelligence}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Social Energy:</span>
-                  <span className="text-pink-400 font-bold">{selectedProfile.socialEnergy}%</span>
+                  <span className="text-stone-600">Social Energy:</span>
+                  <span className="text-sky-700 font-bold">{selectedProfile.socialEnergy}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Confidence:</span>
-                  <span className="text-yellow-400 font-bold">{selectedProfile.confidence}%</span>
+                  <span className="text-stone-600">Confidence:</span>
+                  <span className="text-amber-800 font-bold">{selectedProfile.confidence}%</span>
                 </div>
               </div>
             </div>
 
             <button
               onClick={() => setSelectedProfile(null)}
-              className="w-full py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-all"
+              className="w-full py-3 rounded-full bg-[#143d2b] hover:bg-[#0f2e20] text-white font-semibold text-xs transition-all shadow-xs"
             >
               Close Dossier
             </button>
