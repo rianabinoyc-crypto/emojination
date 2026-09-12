@@ -5,7 +5,11 @@
 > *Explore, communicate, date, track, discover and interact through the world's most unnecessarily comprehensive emoji ecosystem.*
 
 ## Basic Details
-### Team Name: Emojineers
+### Team Name: Pulchaadi
+### Team members
+member1:Delna Saji
+member 2:Riana Binoy
+
 
 ### Project Description
 EMOJINATION™ is an all-in-one emoji operating system and interactive ecosystem. Beyond dating and messaging, Emojination integrates a full fitness & health tracker for emojis, a library of 50+ emoji personalities with custom personality creation, an emoji computational linguistics tools suite, universal achievement & gamification levels, daily challenges, searchable encyclopedias, and telemetry analytics.
