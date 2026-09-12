@@ -107,3 +107,18 @@
     animation: pulseSlow 4s ease-in-out infinite;
   }
 }
+@keyframes atmosphereFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(24px, -18px) scale(1.03);
+  }
+  66% {
+    transform: translate(-18px, 14px) scale(0.98);
+  }
+}
+
+.animate-atmosphere-float {
+  animation: atmosphereFloat ease-in-out infinite alternate;
+}
